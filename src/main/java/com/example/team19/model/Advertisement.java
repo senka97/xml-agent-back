@@ -24,12 +24,66 @@ public class Advertisement {
     private Set<Reservation> reservations;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private PriceList priceList;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Car car;
 
     public Advertisement(){
 
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public int getLimitKm() {
+        return limitKm;
+    }
+
+    public void setLimitKm(int limitKm) {
+        this.limitKm = limitKm;
+    }
+
+    public boolean getCdw() {
+        return cdw;
+    }
+
+    public void setCdw(boolean cdw) {
+        this.cdw = cdw;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public PriceList getPriceList() {
+        return priceList;
+    }
+
+    public void setPriceList(PriceList priceList) {
+        this.priceList = priceList;
+    }
 }

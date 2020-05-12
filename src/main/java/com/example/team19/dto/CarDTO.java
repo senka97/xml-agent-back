@@ -1,42 +1,37 @@
-package com.example.team19.model;
+package com.example.team19.dto;
 
 import com.example.team19.enums.CarClass;
 import com.example.team19.enums.FuelType;
 import com.example.team19.enums.TransmissionType;
+import com.example.team19.model.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-public class Car {
+public class CarDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="childrenSeats")
-    private int childrenSeats;
-    @Column(name="rate")
-    private double rate;
-    @Column(name="mileage")
-    private double mileage;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private CarModel carModel;
-    @Enumerated(EnumType.STRING)
-    private CarClass carClass;
-    @Enumerated(EnumType.STRING)
-    private TransmissionType transType;
-    @Enumerated(EnumType.STRING)
-    private FuelType fuelType;
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Advertisement> advertisements;
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Photo> photos;
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Report> reports;
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Comment> comments;
 
-    public Car(){
+    private int childrenSeats;
+
+    private double rate;
+
+    private double mileage;
+
+    private CarBrandDTO carBrand;
+
+    private CarModelDTO carModel;
+
+    private CarClass carClass;
+
+    private TransmissionType transType;
+
+    private FuelType fuelType;
+
+    private Set<PhotoDTO> photos;
+
+
+    public CarDTO(){
 
     }
 
@@ -64,11 +59,11 @@ public class Car {
         this.rate = rate;
     }
 
-    public CarModel getCarModel() {
+    public CarModelDTO getCarModel() {
         return carModel;
     }
 
-    public void setCarModel(CarModel carModel) {
+    public void setCarModel(CarModelDTO carModel) {
         this.carModel = carModel;
     }
 
@@ -96,19 +91,27 @@ public class Car {
         this.fuelType = fuelType;
     }
 
+    public Set<PhotoDTO> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(Set<PhotoDTO> photos) {
+        this.photos = photos;
+    }
+
+    public CarBrandDTO getCarBrand() {
+        return carBrand;
+    }
+
+    public void setCarBrand(CarBrandDTO carBrand) {
+        this.carBrand = carBrand;
+    }
+
     public double getMileage() {
         return mileage;
     }
 
     public void setMileage(double mileage) {
         this.mileage = mileage;
-    }
-
-    public Set<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<Photo> photos) {
-        this.photos = photos;
     }
 }

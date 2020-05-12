@@ -15,7 +15,7 @@ public class Report {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Car car;
 
-    private Report(){
+    public Report(){
 
     }
 

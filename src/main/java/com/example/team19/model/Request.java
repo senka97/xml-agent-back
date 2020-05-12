@@ -17,7 +17,7 @@ public class Request {
     @OneToMany(mappedBy = "request", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Message> messages;
 
-    private Request(){
+    public Request(){
 
     }
 
