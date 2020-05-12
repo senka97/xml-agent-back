@@ -1,28 +1,26 @@
-package com.example.team19.model;
+package com.example.team19.dto;
+
+import com.example.team19.model.Advertisement;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-public class PriceList {
+public class PriceListDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="pricePerKm")
-    private double pricePerKm;
-    @Column(name="pricePerDay")
-    private double pricePerDay;
-    @Column(name="discount20Days")
-    private int discount20Days;
-    @Column(name="discount30Days")
-    private int discount30Days;
-    @Column(name="alias")
-    private String alias;
-    @OneToMany(mappedBy = "priceList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Advertisement> advertisements;
 
-    public PriceList(){
+    private double pricePerKm;
+
+    private double pricePerDay;
+
+    private int discount20Days;
+
+    private int discount30Days;
+
+    private String alias;
+
+    public PriceListDTO()
+    {
 
     }
 
@@ -72,13 +70,5 @@ public class PriceList {
 
     public void setAlias(String alias) {
         this.alias = alias;
-    }
-
-    public Set<Advertisement> getAdvertisements() {
-        return advertisements;
-    }
-
-    public void setAdvertisements(Set<Advertisement> advertisements) {
-        this.advertisements = advertisements;
     }
 }
