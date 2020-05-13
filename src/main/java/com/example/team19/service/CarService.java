@@ -1,4 +1,4 @@
 package com.example.team19.service;
 
-public interface NekiService {
+public interface CarService {
 }

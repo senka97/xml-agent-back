@@ -26,7 +26,7 @@ public class RequestAd {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Request request;
 
-    private RequestAd(){
+    public RequestAd(){
 
     }
 
