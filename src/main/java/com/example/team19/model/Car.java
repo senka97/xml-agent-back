@@ -111,4 +111,12 @@ public class Car {
     public void setPhotos(Set<Photo> photos) {
         this.photos = photos;
     }
+
+    public Set<Advertisement> getAdvertisements() {
+        return advertisements;
+    }
+
+    public void setAdvertisements(Set<Advertisement> advertisements) {
+        this.advertisements = advertisements;
+    }
 }
