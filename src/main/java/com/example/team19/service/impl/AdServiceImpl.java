@@ -4,6 +4,7 @@ import com.example.team19.dto.*;
 import com.example.team19.model.*;
 import com.example.team19.repository.AdRepository;
 import com.example.team19.service.AdService;
+import com.example.team19.service.PriceListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ public class AdServiceImpl implements AdService {
 
     @Autowired
     private CarServiceImpl carService;
+
+    @Autowired
+    private PriceListServiceImpl priceListService;
 
     @Override
     public ArrayList<AdDTO> searchAds()
@@ -91,4 +95,40 @@ public class AdServiceImpl implements AdService {
 
         return DTOAds;
     }
+
+    @Override
+    public Advertisement save(Advertisement ad) {
+        return adRepository.save(ad);
+    }
+
+    @Override
+    public Advertisement createNewAd(AdDTO adDTO) {
+
+        Advertisement newAd = new Advertisement();
+
+        Car car = new Car();
+
+        if(adDTO.getCar().getId() == null) {
+            //novi auto
+            car = carService.createNewCar(adDTO.getCar());
+        }else{
+            //auto vec postoji
+            car = carService.findById(adDTO.getCar().getId());
+        }
+
+
+        newAd.setCar(car);
+        newAd.setCdw(adDTO.isCdw());
+        newAd.setEndDate(adDTO.getEndDate());
+        newAd.setStartDate(adDTO.getStartDate());
+        newAd.setLimitKm(adDTO.getLimitKm());
+        newAd.setPriceList(priceListService.findById(adDTO.getPriceList().getId()));
+
+        Advertisement createdAd = save(newAd);
+
+
+        return createdAd;
+    }
+
+
 }

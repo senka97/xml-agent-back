@@ -35,6 +35,20 @@ public class CarDTO {
 
     }
 
+    public CarDTO(Car car){
+        id = car.getId();
+        childrenSeats = car.getChildrenSeats();
+        rate = car.getRate();
+        mileage = car.getMileage();
+        carBrand = new CarBrandDTO();
+        carModel = new CarModelDTO(car.getCarModel());
+        carClass = car.getCarClass();
+        transType = car.getTransType();
+        fuelType = car.getFuelType();
+
+        //TODO Slike
+    }
+
     public Long getId() {
         return id;
     }
