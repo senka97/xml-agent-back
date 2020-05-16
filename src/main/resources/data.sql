@@ -1,3 +1,7 @@
+insert into authority (name) value ('ROLE_AGENT');
+insert into agent (email, password) value ('agent@gmail.com', '$2a$10$z8pgIaOYaOE7MgeY7g/ceuqt377Zp8U/ZWQK2N5i1/8Sn4PYM1IIS');
+insert into agent_authority (agent_id, authority_id) value (1,1);
+
 insert into car_brand (name) value ('Tesla');
 insert into car_brand (name) value ('BMW');
 insert into car_brand (name) value('Audi');
@@ -5,6 +9,7 @@ insert into car_brand (name) value('Mercedes');
 
 insert into car_model (name, car_brand_id) value ('Model S', 1);
 insert into car_model (name, car_brand_id) value ('x5', 2);
+
 insert into car_model (name, car_brand_id) value('A8', 3);
 insert into car_model (name, car_brand_id) value('SLR McLaren', 4);
 
@@ -21,8 +26,4 @@ insert into price_list (alias, discount20Days, discount30Days, price_per_day, pr
 insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id ) value ('2020-07-01','2020-07-29','0',false,1,1);
 insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id ) value ('2020-07-02','2020-07-30','0',true,2,1);
 insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id ) value ('2020-07-03','2020-07-31','0',false,3,1);
-
-
-
-
 

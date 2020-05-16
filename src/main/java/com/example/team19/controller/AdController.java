@@ -6,6 +6,7 @@ import com.example.team19.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class AdController {
     @Autowired
     private PriceListServiceImpl priceListService;
 
+
+    @PreAuthorize("hasRole('ROLE_AGENT')")
     @GetMapping(value="/ads", produces = "application/json")
     public ArrayList<AdDTO> search()  {
         // sada vraca sve oglase, nije implementirana pretraga
