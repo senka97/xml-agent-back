@@ -1,21 +1,14 @@
 package com.example.team19.dto;
 
-import com.example.team19.model.Car;
-import com.example.team19.model.PriceList;
-import com.example.team19.model.RequestAd;
-import com.example.team19.model.Reservation;
-
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
-public class AdDTO {
-
+public class AdDTO2 {
+// u ovom DTO datumi su String zbog prikaza na frontu
     private Long id;
 
-    private LocalDate startDate;
+    private String startDate;
 
-    private LocalDate endDate;
+    private String endDate;
 
     private int limitKm;
 
@@ -25,9 +18,9 @@ public class AdDTO {
 
     private PriceListDTO priceList;
 
-    private CarDTO car;
+    private CarDTO2 car;
 
-    public AdDTO(){
+    public AdDTO2(){
 
     }
 
@@ -39,19 +32,19 @@ public class AdDTO {
         this.id = id;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -75,16 +68,16 @@ public class AdDTO {
         return priceList;
     }
 
-    public void setPriceList(PriceListDTO priceListDTO) {
-        this.priceList = priceListDTO;
+    public void setPriceList(PriceListDTO priceList) {
+        this.priceList = priceList;
     }
 
-    public CarDTO getCar() {
+    public CarDTO2 getCar() {
         return car;
     }
 
-    public void setCar(CarDTO carDTO) {
-        this.car = carDTO;
+    public void setCar(CarDTO2 car) {
+        this.car = car;
     }
 
     public String getLocation() {

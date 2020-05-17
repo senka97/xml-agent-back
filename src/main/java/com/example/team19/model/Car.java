@@ -19,6 +19,8 @@ public class Car {
     private double rate;
     @Column(name="mileage")
     private double mileage;
+    @Column(name="hasAndroidApp")
+    private boolean hasAndroidApp;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private CarModel carModel;
     @Enumerated(EnumType.STRING)
@@ -118,5 +120,13 @@ public class Car {
 
     public void setAdvertisements(Set<Advertisement> advertisements) {
         this.advertisements = advertisements;
+    }
+
+    public boolean getHasAndroidApp() {
+        return hasAndroidApp;
+    }
+
+    public void setHasAndroidApp(boolean hasAndroidApp) {
+        this.hasAndroidApp = hasAndroidApp;
     }
 }

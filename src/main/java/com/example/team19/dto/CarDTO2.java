@@ -3,13 +3,11 @@ package com.example.team19.dto;
 import com.example.team19.enums.CarClass;
 import com.example.team19.enums.FuelType;
 import com.example.team19.enums.TransmissionType;
-import com.example.team19.model.*;
 
-import javax.persistence.*;
 import java.util.Set;
 
-public class CarDTO {
-
+public class CarDTO2 {
+// u ovom DTO enumi su string zbog prikaza na frontu
     private Long id;
 
     private int childrenSeats;
@@ -24,32 +22,17 @@ public class CarDTO {
 
     private CarModelDTO carModel;
 
-    private CarClass carClass;
+    private String carClass;
 
-    private TransmissionType transType;
+    private String transType;
 
-    private FuelType fuelType;
+    private String fuelType;
 
     private Set<PhotoDTO> photos;
 
 
-    public CarDTO(){
+    public CarDTO2(){
 
-    }
-
-    public CarDTO(Car car){
-        id = car.getId();
-        childrenSeats = car.getChildrenSeats();
-        rate = car.getRate();
-        mileage = car.getMileage();
-        carBrand = new CarBrandDTO();
-        carModel = new CarModelDTO(car.getCarModel());
-        carClass = car.getCarClass();
-        transType = car.getTransType();
-        fuelType = car.getFuelType();
-        hasAndroidApp = car.getHasAndroidApp();
-
-        //TODO Slike
     }
 
     public Long getId() {
@@ -76,44 +59,12 @@ public class CarDTO {
         this.rate = rate;
     }
 
-    public CarModelDTO getCarModel() {
-        return carModel;
+    public double getMileage() {
+        return mileage;
     }
 
-    public void setCarModel(CarModelDTO carModel) {
-        this.carModel = carModel;
-    }
-
-    public CarClass getCarClass() {
-        return carClass;
-    }
-
-    public void setCarClass(CarClass carClass) {
-        this.carClass = carClass;
-    }
-
-    public TransmissionType getTransType() {
-        return transType;
-    }
-
-    public void setTransType(TransmissionType transType) {
-        this.transType = transType;
-    }
-
-    public FuelType getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
-    }
-
-    public Set<PhotoDTO> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<PhotoDTO> photos) {
-        this.photos = photos;
+    public void setMileage(double mileage) {
+        this.mileage = mileage;
     }
 
     public CarBrandDTO getCarBrand() {
@@ -124,12 +75,44 @@ public class CarDTO {
         this.carBrand = carBrand;
     }
 
-    public double getMileage() {
-        return mileage;
+    public CarModelDTO getCarModel() {
+        return carModel;
     }
 
-    public void setMileage(double mileage) {
-        this.mileage = mileage;
+    public void setCarModel(CarModelDTO carModel) {
+        this.carModel = carModel;
+    }
+
+    public String getCarClass() {
+        return carClass;
+    }
+
+    public void setCarClass(String carClass) {
+        this.carClass = carClass;
+    }
+
+    public String getTransType() {
+        return transType;
+    }
+
+    public void setTransType(String transType) {
+        this.transType = transType;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public Set<PhotoDTO> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(Set<PhotoDTO> photos) {
+        this.photos = photos;
     }
 
     public boolean getHasAndroidApp() {
