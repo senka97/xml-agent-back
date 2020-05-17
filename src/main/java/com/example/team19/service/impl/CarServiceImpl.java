@@ -70,6 +70,7 @@ public class CarServiceImpl implements CarService {
         car.setChildrenSeats(carDTO.getChildrenSeats());
         car.setFuelType(carDTO.getFuelType());
         car.setTransType(carDTO.getTransType());
+        car.setHasAndroidApp(carDTO.getHasAndroidApp());
         //TODO Dodavanje Slika
         //car.setPhotos();
         Car newCar = save(car);

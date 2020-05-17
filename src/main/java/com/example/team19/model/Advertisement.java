@@ -18,6 +18,8 @@ public class Advertisement {
     private int limitKm;
     @Column(name="cdw")
     private boolean cdw;
+    @Column(name="location")
+    private String location;
     @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<RequestAd> requestAds;
     @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -85,5 +87,13 @@ public class Advertisement {
 
     public void setPriceList(PriceList priceList) {
         this.priceList = priceList;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

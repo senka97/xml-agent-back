@@ -1,6 +1,7 @@
 package com.example.team19.controller;
 
 import com.example.team19.dto.AdDTO;
+import com.example.team19.dto.AdDTO2;
 import com.example.team19.model.Advertisement;
 import com.example.team19.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 
 @RestController
@@ -34,9 +36,9 @@ public class AdController {
 
     @PreAuthorize("hasRole('ROLE_AGENT')")
     @GetMapping(value="/ads", produces = "application/json")
-    public ArrayList<AdDTO> search()  {
+    public ResponseEntity<?> search()  {
         // sada vraca sve oglase, nije implementirana pretraga
-        return adService.searchAds();
+        return new ResponseEntity<>(adService.searchAds(),HttpStatus.OK);
     }
 
     @PostMapping(value="/ad",consumes="application/json")
@@ -70,4 +72,18 @@ public class AdController {
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @GetMapping(value="/ads/{id}", produces = "application/json")
+    public ResponseEntity<?> getAd(@PathVariable("id") Long id)
+    {
+        AdDTO2 ad=adService.getAd(id);
+        if(ad != null)
+        {
+            return new ResponseEntity<>(ad,HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
