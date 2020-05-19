@@ -28,6 +28,11 @@ public class AdServiceImpl implements AdService {
     private PriceListServiceImpl priceListService;
 
     @Override
+    public Advertisement findById(Long id) {
+      return adRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public ArrayList<AdDTO2> searchAds()
     {
         ArrayList<AdDTO2> DTOAds = new ArrayList<>();
@@ -114,9 +119,8 @@ public class AdServiceImpl implements AdService {
         newCar.setPhotos(photoDTO);
 
         newAd.setId(ad.getId());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMM yyyy.");
-        newAd.setStartDate(ad.getStartDate().format(formatter));
-        newAd.setEndDate(ad.getEndDate().format(formatter));
+        newAd.setStartDate(ad.getStartDate());
+        newAd.setEndDate(ad.getEndDate());
         newAd.setLimitKm(ad.getLimitKm());
         newAd.setCdw(ad.getCdw());
         newAd.setLocation(ad.getLocation());

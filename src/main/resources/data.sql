@@ -23,7 +23,7 @@ insert into photo (path, car_id) value ('@/assets/audi_a8.jpeg',3);
 
 insert into price_list (alias, discount20Days, discount30Days, price_per_day, price_per_km) value ('Price list 1', 0, 15, 25, 3);
 
-insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-07-01','2020-07-29','0',false,1,1,'Novi Sad');
-insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-07-02','2020-07-30','0',true,2,1,'Novi Sad');
-insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-07-03','2020-07-31','0',false,3,1, 'Beograd');
+insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-05-05','2020-06-05','0',false,1,1,'Novi Sad');
+insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-06-01','2020-06-30','0',true,2,1,'Novi Sad');
+insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-04-01','2020-04-30','0',false,3,1, 'Beograd');
 
