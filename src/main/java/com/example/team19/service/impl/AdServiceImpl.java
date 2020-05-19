@@ -72,8 +72,7 @@ public class AdServiceImpl implements AdService {
         newAd.setEndDate(adDTO.getEndDate());
         newAd.setStartDate(adDTO.getStartDate());
         newAd.setLimitKm(adDTO.getLimitKm());
-       // newAd.setLocation(adDTO.getLocation());
-        newAd.setLocation("Novi Sad"); // izbrisi ovo kada namestis u formi da se unosi lokacija
+        newAd.setLocation(adDTO.getLocation());
         newAd.setPriceList(priceListService.findById(adDTO.getPriceList().getId()));
 
         Advertisement createdAd = save(newAd);
