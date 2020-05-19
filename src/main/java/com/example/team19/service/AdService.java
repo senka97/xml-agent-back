@@ -13,4 +13,6 @@ public interface AdService {
     Advertisement save(Advertisement ad);
     Advertisement createNewAd(AdDTO adDTO);
     AdDTO2 getAd(Long id);
+
+    Advertisement findById(Long id);
 }

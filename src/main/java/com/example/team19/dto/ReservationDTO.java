@@ -1,30 +1,27 @@
-package com.example.team19.model;
+package com.example.team19.dto;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-public class Reservation {
+public class ReservationDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="startDate")
-    private LocalDate startDate;
-    @Column(name="endDate")
-    private LocalDate endDate;
-    @Column(name="clientFirstName")
-    private String clientFirstName;
-    @Column(name="clientLastName")
-    private String clientLastName;
-    @Column(name="clientEmail")
-    private String clientEmail;
-    @Column(name="clientPhoneNumber")
-    private String clientPhoneNumber;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Advertisement advertisement;
 
-    public Reservation(){
+    private LocalDate startDate;
+
+    private LocalDate endDate;
+
+    private String clientFirstName;
+
+    private String clientLastName;
+
+    private String clientEmail;
+
+    private String clientPhoneNumber;
+
+    private Long adId;
+
+    public ReservationDTO()
+    {
 
     }
 
@@ -84,11 +81,11 @@ public class Reservation {
         this.clientPhoneNumber = clientPhoneNumber;
     }
 
-    public Advertisement getAdvertisement() {
-        return advertisement;
+    public Long getAdId() {
+        return adId;
     }
 
-    public void setAdvertisement(Advertisement advertisement) {
-        this.advertisement = advertisement;
+    public void setAdId(Long adId) {
+        this.adId = adId;
     }
 }

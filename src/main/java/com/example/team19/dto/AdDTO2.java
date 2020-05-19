@@ -3,12 +3,12 @@ package com.example.team19.dto;
 import java.time.LocalDate;
 
 public class AdDTO2 {
-// u ovom DTO datumi su String zbog prikaza na frontu
+// CarDTO2 je razlika
     private Long id;
 
-    private String startDate;
+    private LocalDate startDate;
 
-    private String endDate;
+    private LocalDate endDate;
 
     private int limitKm;
 
@@ -32,19 +32,19 @@ public class AdDTO2 {
         this.id = id;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
