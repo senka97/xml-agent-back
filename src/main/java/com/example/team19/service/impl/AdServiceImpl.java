@@ -8,11 +8,15 @@ import com.example.team19.service.PriceListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -104,18 +108,40 @@ public class AdServiceImpl implements AdService {
         PriceList priceList = ad.getPriceList();
         PriceListDTO priceListDTO = new PriceListDTO();
         Set<Photo> photos = car.getPhotos();
-        Set<PhotoDTO> photoDTO = new HashSet<>();
+        ArrayList<String> photos64 = new ArrayList<>();
 
         for(Photo p : photos)
         {
-            PhotoDTO newPhoto = new PhotoDTO();
-            newPhoto.setId(p.getId());
-            newPhoto.setPath(p.getPath());
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            Path path = Paths.get(p.getPath());
+            // write the image to a file
+            System.out.println(p.getPath());
+            File input = path.toFile();
+            BufferedImage img = null;
+            try {
+                img = ImageIO.read(input);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            photoDTO.add(newPhoto);
+            if(img != null) {
+                try {
+
+                    ImageIO.write(img, "png", bos);
+                    byte[] imageBytes = bos.toByteArray();
+
+
+                    String imageString = Base64.getEncoder().encodeToString(imageBytes);
+                    String retStr = "data:image/png;base64," + imageString;
+                    photos64.add(retStr);
+                    bos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        newCar.setPhotos(photoDTO);
+        newCar.setPhotos64(photos64);
 
         newAd.setId(ad.getId());
         newAd.setStartDate(ad.getStartDate());

@@ -4,6 +4,7 @@ import com.example.team19.enums.CarClass;
 import com.example.team19.enums.FuelType;
 import com.example.team19.enums.TransmissionType;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class CarDTO2 {
@@ -28,7 +29,7 @@ public class CarDTO2 {
 
     private String fuelType;
 
-    private Set<PhotoDTO> photos;
+    private ArrayList<String> photos64 = new ArrayList<>();
 
 
     public CarDTO2(){
@@ -107,19 +108,19 @@ public class CarDTO2 {
         this.fuelType = fuelType;
     }
 
-    public Set<PhotoDTO> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<PhotoDTO> photos) {
-        this.photos = photos;
-    }
-
     public boolean getHasAndroidApp() {
         return hasAndroidApp;
     }
 
     public void setHasAndroidApp(boolean hasAndroidApp) {
         this.hasAndroidApp = hasAndroidApp;
+    }
+
+    public ArrayList<String> getPhotos64() {
+        return photos64;
+    }
+
+    public void setPhotos64(ArrayList<String> photos64) {
+        this.photos64 = photos64;
     }
 }
