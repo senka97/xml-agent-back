@@ -3,10 +3,10 @@ package com.example.team19.dto;
 import com.example.team19.enums.CarClass;
 import com.example.team19.enums.FuelType;
 import com.example.team19.enums.TransmissionType;
-import com.example.team19.model.*;
+import com.example.team19.model.Car;
+import com.example.team19.model.Photo;
 
 import javax.imageio.ImageIO;
-import javax.persistence.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Set;
 
-public class CarDTO {
+//za slanje auta na prikaz kod statistike
+public class CarStatisticDTO {
 
     private Long id;
 
@@ -33,32 +34,30 @@ public class CarDTO {
 
     private CarModelDTO carModel;
 
-    private CarClass carClass;
+    private String carClass;
 
-    private TransmissionType transType;
+    private String transType;
 
-    private FuelType fuelType;
-
-    private Set<PhotoDTO> photos;
+    private String fuelType;
 
     private ArrayList<String> photos64 = new ArrayList<>();
 
     private int numberOfComments;
 
-    public CarDTO(){
+    public CarStatisticDTO(){
 
     }
 
-    public CarDTO(Car car){
+    public CarStatisticDTO(Car car){
         id = car.getId();
         childrenSeats = car.getChildrenSeats();
         rate = car.getRate();
         mileage = car.getMileage();
         carBrand = new CarBrandDTO();
         carModel = new CarModelDTO(car.getCarModel());
-        carClass = car.getCarClass();
-        transType = car.getTransType();
-        fuelType = car.getFuelType();
+        carClass = car.getCarClass().toString().replace("_"," ");
+        transType = car.getTransType().toString().replace("_"," ");
+        fuelType = car.getFuelType().toString().replace("_"," ");
         hasAndroidApp = car.getHasAndroidApp();
         numberOfComments = car.getComments().size();
 
@@ -76,8 +75,10 @@ public class CarDTO {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
                 if(img != null) {
                     try {
+
                         ImageIO.write(img, "png", bos);
                         byte[] imageBytes = bos.toByteArray();
 
@@ -119,44 +120,20 @@ public class CarDTO {
         this.rate = rate;
     }
 
-    public CarModelDTO getCarModel() {
-        return carModel;
+    public double getMileage() {
+        return mileage;
     }
 
-    public void setCarModel(CarModelDTO carModel) {
-        this.carModel = carModel;
+    public void setMileage(double mileage) {
+        this.mileage = mileage;
     }
 
-    public CarClass getCarClass() {
-        return carClass;
+    public boolean isHasAndroidApp() {
+        return hasAndroidApp;
     }
 
-    public void setCarClass(CarClass carClass) {
-        this.carClass = carClass;
-    }
-
-    public TransmissionType getTransType() {
-        return transType;
-    }
-
-    public void setTransType(TransmissionType transType) {
-        this.transType = transType;
-    }
-
-    public FuelType getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
-    }
-
-    public Set<PhotoDTO> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(Set<PhotoDTO> photos) {
-        this.photos = photos;
+    public void setHasAndroidApp(boolean hasAndroidApp) {
+        this.hasAndroidApp = hasAndroidApp;
     }
 
     public CarBrandDTO getCarBrand() {
@@ -167,24 +144,36 @@ public class CarDTO {
         this.carBrand = carBrand;
     }
 
-    public double getMileage() {
-        return mileage;
+    public CarModelDTO getCarModel() {
+        return carModel;
     }
 
-    public void setMileage(double mileage) {
-        this.mileage = mileage;
+    public void setCarModel(CarModelDTO carModel) {
+        this.carModel = carModel;
     }
 
-    public boolean getHasAndroidApp() {
-        return hasAndroidApp;
+    public String getCarClass() {
+        return carClass;
     }
 
-    public void setHasAndroidApp(boolean hasAndroidApp) {
-        this.hasAndroidApp = hasAndroidApp;
+    public void setCarClass(String carClass) {
+        this.carClass = carClass;
     }
 
-    public boolean isHasAndroidApp() {
-        return hasAndroidApp;
+    public String getTransType() {
+        return transType;
+    }
+
+    public void setTransType(String transType) {
+        this.transType = transType;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
     }
 
     public ArrayList<String> getPhotos64() {

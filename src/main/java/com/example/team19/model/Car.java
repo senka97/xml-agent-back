@@ -129,4 +129,12 @@ public class Car {
     public void setHasAndroidApp(boolean hasAndroidApp) {
         this.hasAndroidApp = hasAndroidApp;
     }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
 }
