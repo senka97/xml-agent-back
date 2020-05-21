@@ -4,7 +4,6 @@ import com.example.team19.dto.*;
 import com.example.team19.model.*;
 import com.example.team19.repository.AdRepository;
 import com.example.team19.service.AdService;
-import com.example.team19.service.PriceListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -34,6 +33,15 @@ public class AdServiceImpl implements AdService {
     @Override
     public Advertisement findById(Long id) {
       return adRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public ArrayList<Advertisement> findActiveAds() {
+
+        LocalDate today = LocalDate.now();
+        ArrayList<Advertisement> advertisements = adRepository.findActiveAds(today);
+
+        return advertisements;
     }
 
     @Override

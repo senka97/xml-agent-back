@@ -15,4 +15,5 @@ public interface AdService {
     AdDTO2 getAd(Long id);
 
     Advertisement findById(Long id);
+    ArrayList<Advertisement> findActiveAds();
 }
