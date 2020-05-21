@@ -10,4 +10,6 @@ public interface PriceListService {
 
     PriceList findById(Long id);
     ArrayList<PriceListDTO> getAll();
+    PriceList createPriceList(PriceListDTO priceList);
+    Boolean deletePriceList(Long id);
 }
