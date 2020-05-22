@@ -2,6 +2,7 @@ package com.example.team19.controller;
 
 import com.example.team19.dto.AdDTO;
 import com.example.team19.dto.AdDTO2;
+import com.example.team19.dto.AdSearchDTO;
 import com.example.team19.model.Advertisement;
 import com.example.team19.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,34 @@ public class AdController {
 
     @PreAuthorize("hasRole('ROLE_AGENT')")
     @GetMapping(value="/ads", produces = "application/json")
-    public ResponseEntity<?> search()  {
+    public ResponseEntity<?> getAllAds()  {
         // sada vraca sve oglase, nije implementirana pretraga
-        return new ResponseEntity<>(adService.searchAds(),HttpStatus.OK);
+        return new ResponseEntity<>(adService.getAllAds(),HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_AGENT')")
+    @PostMapping(value="/ads", produces = "application/json", consumes="application/json")
+    public ResponseEntity<?> search(@RequestBody AdSearchDTO adSearchDTO)  {
+
+        System.out.println("Location: " + adSearchDTO.getLocation());
+        System.out.println("Start date: " + adSearchDTO.getStartDate());
+        System.out.println("End date: " + adSearchDTO.getEndDate());
+        System.out.println("Cdw: " + adSearchDTO.getCdw());
+        System.out.println("Car brand: " + adSearchDTO.getCarBrand());
+        System.out.println("Car model: " + adSearchDTO.getCarModel());
+        System.out.println("Car class: " + adSearchDTO.getCarClass());
+        System.out.println("Fuel type: " + adSearchDTO.getFuelType());
+        System.out.println("Trasmission type:" + adSearchDTO.getTransmissionType());
+        System.out.println("Children seats: " + adSearchDTO.getChildrenSeats());
+        System.out.println("Mileage: " + adSearchDTO.getMileage());
+        System.out.println("Planned mileage: " + adSearchDTO.getPlannedMileage());
+        System.out.println("Min price: " + adSearchDTO.getMinPrice());
+        System.out.println("Max price: " + adSearchDTO.getMaxPrice());
+        String error = adService.validateAdDTO(adSearchDTO);
+        if(error != null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
+        return new ResponseEntity<>(adService.searchAds(adSearchDTO),HttpStatus.OK);
     }
 
     @PostMapping(value="/ad",consumes="application/json")

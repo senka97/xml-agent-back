@@ -1,5 +1,7 @@
 package com.example.team19.dto;
 
+import com.example.team19.model.CarBrand;
+
 public class CarBrandDTO {
 
     private Long id;
@@ -9,6 +11,11 @@ public class CarBrandDTO {
     public CarBrandDTO()
     {
 
+    }
+
+    public CarBrandDTO(CarBrand carBrand){
+        this.id = carBrand.getId();
+        this.name = carBrand.getName();
     }
 
     public Long getId() {
