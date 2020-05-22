@@ -1,6 +1,7 @@
 package com.example.team19.service.impl;
 
 import com.example.team19.dto.PriceListDTO;
+import com.example.team19.model.Advertisement;
 import com.example.team19.model.PriceList;
 import com.example.team19.repository.PriceListRepository;
 import com.example.team19.service.PriceListService;
@@ -14,6 +15,9 @@ import java.util.List;
 public class PriceListServiceImpl implements PriceListService {
     @Autowired
     private PriceListRepository priceListRepository;
+
+    @Autowired
+    private AdServiceImpl adService;
 
     @Override
     public PriceList findById(Long id) {
@@ -37,6 +41,48 @@ public class PriceListServiceImpl implements PriceListService {
         }
 
         return priceListDTOS;
+    }
+
+    @Override
+    public PriceList createPriceList(PriceListDTO priceList) {
+
+        PriceList newPL = new PriceList();
+
+        newPL.setAlias(priceList.getAlias());
+        newPL.setPricePerDay(priceList.getPricePerDay());
+        newPL.setPricePerKm(priceList.getPricePerKm());
+        newPL.setDiscount20Days(priceList.getDiscount20Days());
+        newPL.setDiscount30Days(priceList.getDiscount30Days());
+
+        return priceListRepository.save(newPL);
+    }
+
+    @Override
+    public Boolean deletePriceList(Long id) {
+
+        PriceList priceList = findById(id);
+        if(priceList != null) // ako postoji ovaj cenovnik
+        {
+            ArrayList<Advertisement> advertisements = adService.findActiveAds(); // vrati sve aktivne oglase (krajnji datum je veci od danasnjeg)
+            Boolean canDelete = true;
+            for(Advertisement ad : advertisements)
+            {
+                if(ad.getPriceList().getId() == id) // prodje kroz sve oglase, ako u bilo kom postoji ovaj cenovnik ne moze se obrisati
+                {
+                    canDelete = false;
+                    break;
+                }
+            }
+            if(!canDelete)
+            {
+                return false;
+            }
+            else {
+                priceListRepository.delete(priceList);
+                return true;
+            }
+        }
+        else return false;
     }
 
 }

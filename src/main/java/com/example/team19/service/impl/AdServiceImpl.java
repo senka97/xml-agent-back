@@ -9,7 +9,6 @@ import com.example.team19.repository.AdRepository;
 import com.example.team19.repository.CarBrandRepository;
 import com.example.team19.repository.CarModelRepository;
 import com.example.team19.service.AdService;
-import com.example.team19.service.PriceListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +46,15 @@ public class AdServiceImpl implements AdService {
     @Override
     public Advertisement findById(Long id) {
       return adRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public ArrayList<Advertisement> findActiveAds() {
+
+        LocalDate today = LocalDate.now();
+        ArrayList<Advertisement> advertisements = adRepository.findActiveAds(today);
+
+        return advertisements;
     }
 
     @Override

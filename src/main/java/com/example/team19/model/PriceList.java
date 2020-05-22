@@ -17,7 +17,7 @@ public class PriceList {
     private int discount20Days;
     @Column(name="discount30Days")
     private int discount30Days;
-    @Column(name="alias")
+    @Column(name="alias", unique = true)
     private String alias;
     @OneToMany(mappedBy = "priceList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Advertisement> advertisements;
