@@ -3,6 +3,7 @@ package com.example.team19.service;
 import com.example.team19.dto.AdDTO;
 import com.example.team19.dto.AdDTO2;
 import com.example.team19.dto.AdSearchDTO;
+import com.example.team19.dto.CommentDTO;
 import com.example.team19.model.Advertisement;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public interface AdService {
     Advertisement save(Advertisement ad);
     Advertisement createNewAd(AdDTO adDTO);
     AdDTO2 getAd(Long id);
+    ArrayList<CommentDTO> getAdComments(Long id);
 
     Advertisement findById(Long id);
     ArrayList<Advertisement> findActiveAds();

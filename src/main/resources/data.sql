@@ -115,3 +115,4 @@ insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_li
 insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-06-01','2020-06-30','0',true,2,1,'Novi Sad');
 insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-04-01','2020-04-30','0',false,3,2, 'Beograd');
 
+insert into comment (from_comment,content,car_id) value ('Pera','<iframe src="javascript:alert(`xss`)">',1);

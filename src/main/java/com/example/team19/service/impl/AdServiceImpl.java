@@ -347,6 +347,19 @@ public class AdServiceImpl implements AdService {
         else return null;
     }
 
+    @Override
+    public ArrayList<CommentDTO> getAdComments(Long id) {
+        Advertisement ad = adRepository.getOne(id);
+
+        ArrayList<CommentDTO> commentsDTO = new ArrayList<>();
+        for (Comment c: ad.getCar().getComments()) {
+            CommentDTO commentDTO = new CommentDTO(c);
+            commentsDTO.add(commentDTO);
+        }
+
+        return commentsDTO;
+    }
+
     public AdDTO2 makeAdDTO(Advertisement ad)
     {
         AdDTO2 newAd = new AdDTO2();
