@@ -6,6 +6,9 @@ import com.example.team19.model.RequestAd;
 import com.example.team19.model.Reservation;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -21,6 +24,9 @@ public class AdDTO {
 
     private boolean cdw;
 
+    @NotBlank(message="Location must not be empty.")
+    @Size(min=2, max=40, message = "Location must be from 2 to 40 characters long.")
+    @Pattern(regexp="[a-zA-Z ]+$", message="Location must not include special characters and numbers.")
     private String location;
 
     private PriceListDTO priceList;
