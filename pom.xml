@@ -68,6 +68,22 @@
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--Zbog klase HttpsUrlConnectionMessageSender-->
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-support</artifactId>
+            <version>2.1.4.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -75,6 +91,29 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.14.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaLanguage>WSDL</schemaLanguage>
+                    <generatePackage>com.example.team19.wsdl</generatePackage>
+                    <schemas>
+                        <schema>
+                            <!--<url>https://localhost:8083/rent-service/ws/test.wsdl</url>-->
+                            <!--nisam uspela da bude preko zuul, ne moze da isparsira dobro nesto-->
+                            <url>http://localhost:8084/ws/test.wsdl</url>
+                        </schema>
+                    </schemas>
+                </configuration>
             </plugin>
         </plugins>
     </build>
