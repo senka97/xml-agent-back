@@ -45,6 +45,8 @@ public class CarDTO {
 
     private int numberOfComments;
 
+    private Long mainId;
+
     public CarDTO(){
 
     }
@@ -61,7 +63,7 @@ public class CarDTO {
         fuelType = car.getFuelType();
         hasAndroidApp = car.getHasAndroidApp();
         numberOfComments = car.getComments().size();
-
+        mainId = car.getMainId();
         //slike
         if(car.getPhotos() != null) {
             for (Photo p : car.getPhotos()) {
@@ -201,5 +203,13 @@ public class CarDTO {
 
     public void setNumberOfComments(int numberOfComments) {
         this.numberOfComments = numberOfComments;
+    }
+
+    public Long getMainId() {
+        return mainId;
+    }
+
+    public void setMainId(Long mainId) {
+        this.mainId = mainId;
     }
 }

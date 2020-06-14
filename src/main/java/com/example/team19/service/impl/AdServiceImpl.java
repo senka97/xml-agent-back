@@ -319,16 +319,26 @@ public class AdServiceImpl implements AdService {
         }else{
             //auto vec postoji
             car = carService.findById(adDTO.getCar().getId());
+
+            if(car.getMainId() == null)
+                car.setMainId(adDTO.getCar().getMainId());
+
+            carService.save(car);
         }
 
-
+        newAd.setMainId(adDTO.getId());
         newAd.setCar(car);
         newAd.setCdw(adDTO.isCdw());
         newAd.setEndDate(adDTO.getEndDate());
         newAd.setStartDate(adDTO.getStartDate());
         newAd.setLimitKm(adDTO.getLimitKm());
         newAd.setLocation(adDTO.getLocation());
-        newAd.setPriceList(priceListService.findById(adDTO.getPriceList().getId()));
+
+
+        PriceList priceList = priceListService.findById(adDTO.getPriceList().getId());
+        priceList.setMainId(adDTO.getPriceList().getMainId());
+        priceList = priceListService.save(priceList);
+        newAd.setPriceList(priceList);
 
         Advertisement createdAd = save(newAd);
 

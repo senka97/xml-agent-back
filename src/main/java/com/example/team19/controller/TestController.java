@@ -17,9 +17,11 @@ public class TestController {
     private TestClient testClient;
 
     @GetMapping
-    public ResponseEntity<?> test(){
+    public ResponseEntity<?> test() {
 
         GetTestResponse gtr = this.testClient.getTest("Test");
         return new ResponseEntity(gtr.getResponse(), HttpStatus.OK);
+
     }
+
 }
