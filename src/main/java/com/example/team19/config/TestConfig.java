@@ -1,5 +1,6 @@
 package com.example.team19.config;
 
+import com.example.team19.soap.CarClient;
 import com.example.team19.soap.TestClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,15 @@ public class TestConfig {
     public TestClient testClient(Jaxb2Marshaller marshaller) {
         TestClient client = new TestClient();
         client.setDefaultUri("https://localhost:8083/rent-service/ws");
+        client.setMarshaller(marshaller);
+        client.setUnmarshaller(marshaller);
+        return client;
+    }
+
+    @Bean
+    public CarClient carClient(Jaxb2Marshaller marshaller) {
+        CarClient client = new CarClient();
+        client.setDefaultUri("https://localhost:8083/car-service/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         return client;

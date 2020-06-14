@@ -112,6 +112,9 @@
                             <!--nisam uspela da bude preko zuul, ne moze da isparsira dobro nesto-->
                             <url>http://localhost:8084/ws/test.wsdl</url>
                         </schema>
+                        <schema>
+                            <url>http://localhost:8082/ws/comment.wsdl</url>
+                        </schema>
                     </schemas>
                 </configuration>
             </plugin>
