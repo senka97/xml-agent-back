@@ -21,6 +21,23 @@ public class Agent implements UserDetails {
     @Column(name="password", nullable = false)
     private String password;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "surname", nullable = false)
+    private String surname;
+
+    @Column(name="mainId")
+    private Long mainId;
+
+    @Column(name = "company_name", nullable = true)
+    private String companyName;
+
+    @Column(name = "company_number", nullable = true)
+    private String companyNumber;
+
+    @Column(name = "address", nullable = true)
+    private String address;
 
     @Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
@@ -55,6 +72,54 @@ public class Agent implements UserDetails {
         Timestamp now = new Timestamp(DateTime.now().getMillis());
         this.setLastPasswordResetDate(now);
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Long getMainId() {
+        return mainId;
+    }
+
+    public void setMainId(Long mainId) {
+        this.mainId = mainId;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyNumber() {
+        return companyNumber;
+    }
+
+    public void setCompanyNumber(String companyNumber) {
+        this.companyNumber = companyNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

@@ -120,6 +120,9 @@
                         <schema>
                             <url>http://localhost:8081/ws/User.wsdl</url>
                         </schema>
+                        <schema>
+                            <url>http://localhost:8082/ws/comment.wsdl</url>
+                        </schema>
                    </schemas>
                </configuration>
            </plugin>

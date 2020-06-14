@@ -3,11 +3,9 @@ package com.example.team19.controller;
 import com.example.team19.dto.AdDTO;
 import com.example.team19.dto.AdDTO2;
 import com.example.team19.dto.AdSearchDTO;
-import com.example.team19.dto.CommentDTO;
 import com.example.team19.model.Advertisement;
 import com.example.team19.service.impl.*;
 import com.example.team19.soap.AdClient;
-import com.example.team19.soap.TestClient;
 import com.example.team19.wsdl.PostAdResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +14,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
-import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -128,18 +124,4 @@ public class AdController {
         }
     }
 
-    @GetMapping(value="/ad/{id}/car/comments", produces = "application/json")
-    public ResponseEntity<?> getAdComments(@PathVariable("id") Long id)
-    {
-        Advertisement ad=adService.findById(id);
-        if(ad != null)
-        {
-            ArrayList<CommentDTO> comments = adService.getAdComments(id);
-            return new ResponseEntity<>(comments,HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }
 }
