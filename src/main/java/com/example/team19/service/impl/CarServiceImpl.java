@@ -82,6 +82,7 @@ public class CarServiceImpl implements CarService {
     public Car createNewCar(CarDTO carDTO) {
 
         Car car = new Car();
+        car.setMainId(carDTO.getMainId());
         car.setCarModel(carModelService.findById(carDTO.getCarModel().getId()));
         car.setCarClass(carDTO.getCarClass());
         car.setChildrenSeats(carDTO.getChildrenSeats());
@@ -123,7 +124,7 @@ public class CarServiceImpl implements CarService {
                     e.printStackTrace();
                 }
 
-                String folder = "/carPictures/";
+                String folder = "./carPictures/";
 
                 Path directoryPath = Paths.get(folder);
                 File directory = directoryPath.toFile();

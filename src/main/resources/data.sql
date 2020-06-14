@@ -99,12 +99,12 @@ insert into car (children_seats, rate ,mileage, car_model_id, car_class, fuel_ty
 insert into car (children_seats, rate ,mileage, car_model_id, car_class, fuel_type, trans_type, has_android_app) value (0, 3.8, 2000, 2, 'Station_vagon','Gas','Manuel', false);
 insert into car (children_seats, rate ,mileage, car_model_id, car_class, fuel_type, trans_type, has_android_app) value (2, 4, 10000, 3, 'Sport_car','Gas','Semi_automatic', true);
 
-insert into photo (path, car_id) value ('/carPictures/1.png',1);
-insert into photo (path, car_id) value ('/carPictures/2_0.png',2);
-insert into photo (path, car_id) value ('/carPictures/2_1.png',2);
-insert into photo (path, car_id) value ('/carPictures/2_2.png',2);
-insert into photo (path, car_id) value ('/carPictures/3_0.png',3);
-insert into photo (path, car_id) value ('/carPictures/3_1.png',3);
+insert into photo (path, car_id) value ('./carPictures/1.png',1);
+insert into photo (path, car_id) value ('./carPictures/2_0.png',2);
+insert into photo (path, car_id) value ('./carPictures/2_1.png',2);
+insert into photo (path, car_id) value ('./carPictures/2_2.png',2);
+insert into photo (path, car_id) value ('./carPictures/3_0.png',3);
+insert into photo (path, car_id) value ('./carPictures/3_1.png',3);
 
 
 
