@@ -12,4 +12,5 @@ public interface PriceListService {
     ArrayList<PriceListDTO> getAll();
     PriceList createPriceList(PriceListDTO priceList);
     Boolean deletePriceList(Long id);
+    PriceList save(PriceList priceList);
 }

@@ -85,4 +85,9 @@ public class PriceListServiceImpl implements PriceListService {
         else return false;
     }
 
+    @Override
+    public PriceList save(PriceList priceList) {
+        return priceListRepository.save(priceList);
+    }
+
 }

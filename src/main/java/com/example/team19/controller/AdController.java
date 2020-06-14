@@ -6,6 +6,9 @@ import com.example.team19.dto.AdSearchDTO;
 import com.example.team19.dto.CommentDTO;
 import com.example.team19.model.Advertisement;
 import com.example.team19.service.impl.*;
+import com.example.team19.soap.AdClient;
+import com.example.team19.soap.TestClient;
+import com.example.team19.wsdl.PostAdResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +39,8 @@ public class AdController {
     @Autowired
     private PriceListServiceImpl priceListService;
 
+    @Autowired
+    private AdClient adClient;
 
     @PreAuthorize("hasRole('ROLE_AGENT')")
     @GetMapping(value="/ads", produces = "application/json")
@@ -96,6 +101,15 @@ public class AdController {
             return new ResponseEntity<>("Number of seats must be lower than 5",HttpStatus.BAD_REQUEST);
         }
 
+        PostAdResponse adPosted= adClient.postAd(newAdDTO);
+
+        if(adPosted.getIdAd() == 0){
+            return new ResponseEntity<>("Ad was not been able to be posted on publishing app",HttpStatus.BAD_REQUEST);
+        }
+
+        newAdDTO.setId(adPosted.getIdAd());
+        newAdDTO.getCar().setMainId(adPosted.getIdCar());
+        newAdDTO.getPriceList().setMainId(adPosted.getIdPriceList());
         Advertisement ad = adService.createNewAd(newAdDTO);
 
         return new ResponseEntity<>(HttpStatus.CREATED);

@@ -28,6 +28,8 @@ public class Advertisement {
     private PriceList priceList;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Car car;
+    @Column(name="mainId")
+    private Long mainId;
 
     public Advertisement(){
 
@@ -95,5 +97,13 @@ public class Advertisement {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Long getMainId() {
+        return mainId;
+    }
+
+    public void setMainId(Long mainId) {
+        this.mainId = mainId;
     }
 }

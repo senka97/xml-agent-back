@@ -21,6 +21,8 @@ public class PriceList {
     private String alias;
     @OneToMany(mappedBy = "priceList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Advertisement> advertisements;
+    @Column(name="mainId")
+    private Long mainId;
 
     public PriceList(){
 
@@ -80,5 +82,13 @@ public class PriceList {
 
     public void setAdvertisements(Set<Advertisement> advertisements) {
         this.advertisements = advertisements;
+    }
+
+    public Long getMainId() {
+        return mainId;
+    }
+
+    public void setMainId(Long mainId) {
+        this.mainId = mainId;
     }
 }

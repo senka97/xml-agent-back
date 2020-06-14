@@ -19,6 +19,8 @@ public class PriceListDTO {
 
     private String alias;
 
+    private Long mainId;
+
     public PriceListDTO()
     {
 
@@ -70,5 +72,13 @@ public class PriceListDTO {
 
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    public Long getMainId() {
+        return mainId;
+    }
+
+    public void setMainId(Long mainId) {
+        this.mainId = mainId;
     }
 }
