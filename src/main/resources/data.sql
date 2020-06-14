@@ -1,5 +1,5 @@
 insert into authority (name) value ('ROLE_AGENT');
-insert into agent (email, password) value ('agent@gmail.com', '$2a$10$z8pgIaOYaOE7MgeY7g/ceuqt377Zp8U/ZWQK2N5i1/8Sn4PYM1IIS');
+insert into agent (email, password, main_id, name, surname, company_name, company_number, address) value ('agent@gmail.com', '$2a$10$z8pgIaOYaOE7MgeY7g/ceuqt377Zp8U/ZWQK2N5i1/8Sn4PYM1IIS', 2, 'Agent1', 'Agent', 'My company', '123456789', 'Alekse Santica 4');
 insert into agent_authority (agent_id, authority_id) value (1,1);
 
 insert into car_brand (name) value ('Tesla');
@@ -87,32 +87,23 @@ insert into car_model (name, car_brand_id) value ('Sienna', 13);
 insert into car_model (name, car_brand_id) value ('Yaris', 13);
 insert into car_model (name, car_brand_id) value ('Corolla', 13);
 
-
-
-
-
-
-
-
-
-insert into car (children_seats, rate ,mileage, car_model_id, car_class, fuel_type, trans_type, has_android_app) value (1, 3.5, 5000, 1,'Suv','Gas','Semi_automatic', true);
-insert into car (children_seats, rate ,mileage, car_model_id, car_class, fuel_type, trans_type, has_android_app) value (0, 3.8, 2000, 2, 'Station_vagon','Gas','Manuel', false);
-insert into car (children_seats, rate ,mileage, car_model_id, car_class, fuel_type, trans_type, has_android_app) value (2, 4, 10000, 3, 'Sport_car','Gas','Semi_automatic', true);
+insert into car (children_seats, rate ,mileage, car_model_id, car_class, fuel_type, trans_type, has_android_app, main_id) value (1, 3.5, 5000, 1,'Suv','Gas','Semi_automatic', true,1);
+insert into car (children_seats, rate ,mileage, car_model_id, car_class, fuel_type, trans_type, has_android_app, main_id) value (0, 3.8, 2000, 2, 'Station_vagon','Gas','Manuel', false,2);
+--insert into car (children_seats, rate ,mileage, car_model_id, car_class, fuel_type, trans_type, has_android_app) value (2, 4, 10000, 3, 'Sport_car','Gas','Semi_automatic', true);
 
 insert into photo (path, car_id) value ('./carPictures/1.png',1);
 insert into photo (path, car_id) value ('./carPictures/2_0.png',2);
 insert into photo (path, car_id) value ('./carPictures/2_1.png',2);
 insert into photo (path, car_id) value ('./carPictures/2_2.png',2);
-insert into photo (path, car_id) value ('./carPictures/3_0.png',3);
-insert into photo (path, car_id) value ('./carPictures/3_1.png',3);
+--insert into photo (path, car_id) value ('./carPictures/3_0.png',3);
+--insert into photo (path, car_id) value ('./carPictures/3_1.png',3);
 
 
+insert into price_list (alias, discount20Days, discount30Days, price_per_day, price_per_km, main_id) value ('Price list - agent 1', 0, 15, 25, 3, 1);
+--insert into price_list (alias, discount20Days, discount30Days, price_per_day, price_per_km) value ('Summer Price List', 10, 20, 30, 4);
 
-insert into price_list (alias, discount20Days, discount30Days, price_per_day, price_per_km) value ('Price list 1', 0, 15, 25, 3);
-insert into price_list (alias, discount20Days, discount30Days, price_per_day, price_per_km) value ('Summer Price List', 10, 20, 30, 4);
-
-insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-06-01','2020-06-30','0',false,1,1,'Novi Sad');
-insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-06-15','2020-06-30','0',true,2,1,'Novi Sad');
-insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-06-01','2020-06-30','0',false,3,2, 'Beograd');
+insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location, main_id) value ('2020-06-01','2020-06-25','0',false,1,1,'Novi Sad', 1);
+insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location, main_id ) value ('2020-06-01','2020-06-30','0',true,2,1,'Novi Sad', 2);
+--insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-06-01','2020-06-30','0',false,3,2, 'Beograd');
 
 --insert into comment (from_comment,content,car_id) value ('Pera','<iframe src="javascript:alert(`xss`)">',1);
