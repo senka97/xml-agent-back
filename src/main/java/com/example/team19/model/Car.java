@@ -35,7 +35,8 @@ public class Car {
     private Set<Photo> photos;
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Report> reports;
-
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Comment> comments;
     @Column(name="mainId")
     private Long mainId;
 
@@ -138,5 +139,13 @@ public class Car {
 
     public void setMainId(Long mainId) {
         this.mainId = mainId;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
