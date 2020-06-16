@@ -1,14 +1,17 @@
 package com.example.team19.service.impl;
 
+import com.example.team19.dto.CarBrandDTO;
 import com.example.team19.dto.CarDTO;
+import com.example.team19.dto.CarModelDTO;
 import com.example.team19.dto.CarStatisticDTO;
-import com.example.team19.model.Advertisement;
-import com.example.team19.model.Car;
-import com.example.team19.model.Photo;
+import com.example.team19.model.*;
 import com.example.team19.repository.CarRepository;
 import com.example.team19.service.CarModelService;
 import com.example.team19.service.CarService;
 import com.example.team19.service.PhotoService;
+import com.example.team19.soap.CarClient;
+import com.example.team19.wsdl.MostCommentsRequest;
+import com.example.team19.wsdl.MostCommentsResponse;
 import com.mysql.cj.util.Base64Decoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +42,9 @@ public class CarServiceImpl implements CarService {
 
     @Autowired
     private PhotoServiceImpl photoService;
+
+    @Autowired
+    private CarClient carClient;
 
     @Override
     public Car save(Car car) {
@@ -181,19 +187,31 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarStatisticDTO getCarWithMostComments() {
-        List<Car> cars = carRepository.findAll();
-        Car mostComments = cars.get(0);
-        for(Car car: cars){
-            if(car.getComments() != null) {
 
-                if (mostComments == null)
-                    mostComments = car;
+        MostCommentsResponse mostCommentsResponse = carClient.getCarWithMostComments();
+        CarStatisticDTO mostComments= new CarStatisticDTO();
 
-                if (mostComments.getComments().size() < car.getComments().size())
-                    mostComments = car;
-            }
+        CarModelDTO carModel = new CarModelDTO();
+        carModel.setName(mostCommentsResponse.getCarSOAP().getCarModel());
+        CarBrandDTO carBrand = new CarBrandDTO();
+        carBrand.setName(mostCommentsResponse.getCarSOAP().getCarBrand());
+        carModel.setCarBrand(carBrand);
+
+        mostComments.setCarModel(carModel);
+        mostComments.setCarClass(mostCommentsResponse.getCarSOAP().getCarClass());
+        mostComments.setChildrenSeats(mostCommentsResponse.getCarSOAP().getChildrenSeats());
+        mostComments.setFuelType(mostCommentsResponse.getCarSOAP().getFeulType());
+        mostComments.setHasAndroidApp(mostCommentsResponse.getCarSOAP().isHasAndroidApp());
+        mostComments.setMileage(mostCommentsResponse.getCarSOAP().getMileage());
+        mostComments.setNumberOfComments(mostCommentsResponse.getCarSOAP().getNumberOfComments());
+        mostComments.setRate(mostCommentsResponse.getCarSOAP().getRate());
+        mostComments.setTransType(mostCommentsResponse.getCarSOAP().getTransType());
+
+        //photos
+        for(String img :mostCommentsResponse.getCarSOAP().getPhotos64()){
+            mostComments.getPhotos64().add(img);
         }
-        return new CarStatisticDTO(mostComments);
+        return mostComments;
     }
 
     @Override
