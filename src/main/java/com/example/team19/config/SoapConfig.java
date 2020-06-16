@@ -1,15 +1,12 @@
 package com.example.team19.config;
 
-import com.example.team19.soap.AdClient;
-import com.example.team19.soap.LoginClient;
-import com.example.team19.soap.CarClient;
-import com.example.team19.soap.TestClient;
+import com.example.team19.soap.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 @Configuration
-public class TestConfig {
+public class SoapConfig {
 
     @Bean
     public Jaxb2Marshaller marshaller() {
@@ -51,6 +48,15 @@ public class TestConfig {
     public CarClient carClient(Jaxb2Marshaller marshaller) {
         CarClient client = new CarClient();
         client.setDefaultUri("https://localhost:8083/car-service/ws");
+        client.setMarshaller(marshaller);
+        client.setUnmarshaller(marshaller);
+        return client;
+    }
+
+    @Bean
+    public RentClient rentClient(Jaxb2Marshaller marshaller) {
+        RentClient client = new RentClient();
+        client.setDefaultUri("https://localhost:8083/rent-service/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         return client;

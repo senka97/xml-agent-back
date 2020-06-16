@@ -2,8 +2,10 @@ package com.example.team19.controller;
 
 import com.example.team19.dto.AdDTO;
 import com.example.team19.dto.ReservationDTO;
+import com.example.team19.dto.ReservationResponseDTO;
 import com.example.team19.model.Advertisement;
 import com.example.team19.model.Reservation;
+import com.example.team19.service.impl.AdServiceImpl;
 import com.example.team19.service.impl.ReservationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +20,17 @@ public class ReservationController {
 
     @Autowired
     ReservationServiceImpl reservationService;
+    @Autowired
+    AdServiceImpl adService;
 
     @PostMapping(value="/reservations",consumes="application/json")
     public ResponseEntity<?> createNewReservation(@RequestBody ReservationDTO reservationDTO)  {
+
+        //Prvo proverim da li postoji oglas sa tim id
+        Advertisement ad = adService.findById(reservationDTO.getAdId());
+        if(ad == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ad with that id doesn't exist.");
+        }
 
         if(reservationDTO.getClientFirstName() == null || reservationDTO.getClientLastName() == null || reservationDTO.getClientEmail() == null || reservationDTO.getClientPhoneNumber() == null){
             return new ResponseEntity<>("All information about client must be entered!", HttpStatus.BAD_REQUEST);
@@ -34,13 +44,16 @@ public class ReservationController {
             return new ResponseEntity<>("Start date must be before end date!",HttpStatus.BAD_REQUEST);
         }
 
-        Reservation r = reservationService.createNewReservation(reservationDTO);
+        ReservationResponseDTO r = reservationService.createNewReservation(reservationDTO);
 
-        if(r == null)
-        {
-            return new ResponseEntity<>("These dates are already reserved",HttpStatus.EXPECTATION_FAILED);
+        if(r == null) {
+            return new ResponseEntity<>("These dates are already reserved.",HttpStatus.EXPECTATION_FAILED);
+        } else {
+            if(r.getId() == null){ //napravljen prazan
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong on the main app. Please contact technical support.");
+            }
+            return new ResponseEntity<>(r, HttpStatus.CREATED);
         }
-        else return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
 

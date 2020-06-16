@@ -123,6 +123,12 @@
                         <schema>
                             <url>http://localhost:8082/ws/comment.wsdl</url>
                         </schema>
+                        <schema>
+                            <url>http://localhost:8084/ws/request.wsdl</url>
+                        </schema>
+                        <schema>
+                            <url>http://localhost:8084/ws/reservation.wsdl</url>
+                        </schema>
                    </schemas>
                </configuration>
            </plugin>
