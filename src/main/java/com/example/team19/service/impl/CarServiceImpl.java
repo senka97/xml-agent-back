@@ -10,8 +10,9 @@ import com.example.team19.service.CarModelService;
 import com.example.team19.service.CarService;
 import com.example.team19.service.PhotoService;
 import com.example.team19.soap.CarClient;
-import com.example.team19.wsdl.MostCommentsRequest;
-import com.example.team19.wsdl.MostCommentsResponse;
+import com.example.team19.wsdl.GetCarWithBestRateResponse;
+import com.example.team19.wsdl.GetCarWithMostCommentsResponse;
+import com.example.team19.wsdl.GetCarWithMostKilometersResponse;
 import com.mysql.cj.util.Base64Decoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -165,30 +166,64 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarStatisticDTO getCarWithMostKilometers() {
-        List<Car> cars = carRepository.findAll();
-        Car mostKilometers = cars.get(0);
-        for(Car car: cars){
-            if(mostKilometers.getMileage() < car.getMileage())
-                mostKilometers=car;
+        GetCarWithMostKilometersResponse mostKilometersResponse = carClient.getCarWithMostKilometers();
+        CarStatisticDTO mostKillometers= new CarStatisticDTO();
+
+        CarModelDTO carModel = new CarModelDTO();
+        carModel.setName(mostKilometersResponse.getCarSOAP().getCarModel());
+        CarBrandDTO carBrand = new CarBrandDTO();
+        carBrand.setName(mostKilometersResponse.getCarSOAP().getCarBrand());
+        carModel.setCarBrand(carBrand);
+
+        mostKillometers.setCarModel(carModel);
+        mostKillometers.setCarClass(mostKilometersResponse.getCarSOAP().getCarClass());
+        mostKillometers.setChildrenSeats(mostKilometersResponse.getCarSOAP().getChildrenSeats());
+        mostKillometers.setFuelType(mostKilometersResponse.getCarSOAP().getFeulType());
+        mostKillometers.setHasAndroidApp(mostKilometersResponse.getCarSOAP().isHasAndroidApp());
+        mostKillometers.setMileage(mostKilometersResponse.getCarSOAP().getMileage());
+        mostKillometers.setNumberOfComments(mostKilometersResponse.getCarSOAP().getNumberOfComments());
+        mostKillometers.setRate(mostKilometersResponse.getCarSOAP().getRate());
+        mostKillometers.setTransType(mostKilometersResponse.getCarSOAP().getTransType());
+
+        //photos
+        for(String img :mostKilometersResponse.getCarSOAP().getPhotos64()){
+            mostKillometers.getPhotos64().add(img);
         }
-        return new CarStatisticDTO(mostKilometers);
+        return mostKillometers;
     }
 
     @Override
     public CarStatisticDTO getCarWithBestScore() {
-        List<Car> cars = carRepository.findAll();
-        Car bestScore = cars.get(0);
-        for(Car car: cars){
-            if(bestScore.getRate() < car.getRate())
-                bestScore=car;
+        GetCarWithBestRateResponse bestRateResponse = carClient.getCarWithBestRate();
+        CarStatisticDTO bestRate= new CarStatisticDTO();
+
+        CarModelDTO carModel = new CarModelDTO();
+        carModel.setName(bestRateResponse.getCarSOAP().getCarModel());
+        CarBrandDTO carBrand = new CarBrandDTO();
+        carBrand.setName(bestRateResponse.getCarSOAP().getCarBrand());
+        carModel.setCarBrand(carBrand);
+
+        bestRate.setCarModel(carModel);
+        bestRate.setCarClass(bestRateResponse.getCarSOAP().getCarClass());
+        bestRate.setChildrenSeats(bestRateResponse.getCarSOAP().getChildrenSeats());
+        bestRate.setFuelType(bestRateResponse.getCarSOAP().getFeulType());
+        bestRate.setHasAndroidApp(bestRateResponse.getCarSOAP().isHasAndroidApp());
+        bestRate.setMileage(bestRateResponse.getCarSOAP().getMileage());
+        bestRate.setNumberOfComments(bestRateResponse.getCarSOAP().getNumberOfComments());
+        bestRate.setRate(bestRateResponse.getCarSOAP().getRate());
+        bestRate.setTransType(bestRateResponse.getCarSOAP().getTransType());
+
+        //photos
+        for(String img :bestRateResponse.getCarSOAP().getPhotos64()){
+            bestRate.getPhotos64().add(img);
         }
-        return new CarStatisticDTO(bestScore);
+        return bestRate;
     }
 
     @Override
     public CarStatisticDTO getCarWithMostComments() {
 
-        MostCommentsResponse mostCommentsResponse = carClient.getCarWithMostComments();
+        GetCarWithMostCommentsResponse mostCommentsResponse = carClient.getCarWithMostComments();
         CarStatisticDTO mostComments= new CarStatisticDTO();
 
         CarModelDTO carModel = new CarModelDTO();

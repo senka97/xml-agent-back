@@ -73,7 +73,6 @@ public class AdClient extends WebServiceGatewaySupport {
         request.setLimitKm(adDTO.getLimitKm());
         request.setLocation(adDTO.getLocation());
         request.setLimitKm(adDTO.getLimitKm());
-
         PriceList priceList = new PriceList();
 
 

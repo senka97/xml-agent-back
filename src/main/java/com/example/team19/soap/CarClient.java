@@ -67,7 +67,7 @@ public class CarClient extends WebServiceGatewaySupport {
     }
 
 
-    public MostCommentsResponse getCarWithMostComments(){
+    public GetCarWithMostCommentsResponse getCarWithMostComments(){
         //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
         System.out.println("Most Comments");
@@ -77,9 +77,49 @@ public class CarClient extends WebServiceGatewaySupport {
 
         LoginResponse  loginResponse = loginClient.login();
 
-        MostCommentsRequest request = new MostCommentsRequest();
+        GetCarWithMostCommentsRequest request = new GetCarWithMostCommentsRequest();
         request.setId(1);
-        MostCommentsResponse response = (MostCommentsResponse) getWebServiceTemplate()
+        GetCarWithMostCommentsResponse response = (GetCarWithMostCommentsResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(request, new SoapRequestHeaderModifier(loginResponse.getToken()));
+
+        System.out.println(response.getCarSOAP().getCarModel());
+        return response;
+
+    }
+
+    public GetCarWithBestRateResponse getCarWithBestRate(){
+        //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
+        //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
+        System.out.println("Best Rate");
+        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        getWebServiceTemplate().setMessageSender(sender);
+
+        LoginResponse  loginResponse = loginClient.login();
+
+        GetCarWithBestRateRequest request = new GetCarWithBestRateRequest();
+        request.setId(1);
+        GetCarWithBestRateResponse response = (GetCarWithBestRateResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(request, new SoapRequestHeaderModifier(loginResponse.getToken()));
+
+        System.out.println(response.getCarSOAP().getCarModel());
+        return response;
+
+    }
+
+    public GetCarWithMostKilometersResponse getCarWithMostKilometers(){
+        //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
+        //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
+        System.out.println("Most Comments");
+        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        getWebServiceTemplate().setMessageSender(sender);
+
+        LoginResponse  loginResponse = loginClient.login();
+
+        GetCarWithMostKilometersRequest request = new GetCarWithMostKilometersRequest();
+        request.setId(1);
+        GetCarWithMostKilometersResponse response = (GetCarWithMostKilometersResponse) getWebServiceTemplate()
                 .marshalSendAndReceive(request, new SoapRequestHeaderModifier(loginResponse.getToken()));
 
         System.out.println(response.getCarSOAP().getCarModel());
