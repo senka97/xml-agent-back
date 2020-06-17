@@ -1,16 +1,17 @@
 package com.example.team19.controller;
 
-import com.example.team19.dto.AdDTO;
 import com.example.team19.dto.ReservationDTO;
+import com.example.team19.dto.ReservationFrontDTO;
 import com.example.team19.dto.ReservationResponseDTO;
 import com.example.team19.model.Advertisement;
-import com.example.team19.model.Reservation;
 import com.example.team19.service.impl.AdServiceImpl;
 import com.example.team19.service.impl.ReservationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -54,6 +55,13 @@ public class ReservationController {
             }
             return new ResponseEntity<>(r, HttpStatus.CREATED);
         }
+    }
+
+    @GetMapping(value="/reservations")
+    public ResponseEntity<?> getReservationsFront(){
+
+        List<ReservationFrontDTO> reservationFrontDTOs = this.reservationService.getReservationsFront();
+        return new ResponseEntity(reservationFrontDTOs,HttpStatus.OK);
     }
 }
 

@@ -19,10 +19,17 @@ public class RequestController {
     private RequestServiceImpl requestService;
 
 
-    @GetMapping(value="/pending", produces="application/properties")
+    @GetMapping(value="/pending")
     public ResponseEntity<?> getPendingRequestsFront(){
 
         List<RequestFrontDTO> requestFrontDTOs = this.requestService.getPendingRequestsFront();
+        return new ResponseEntity(requestFrontDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(value="/paid")
+    public ResponseEntity<?> getPaidRequestsFront(){
+
+        List<RequestFrontDTO> requestFrontDTOs = this.requestService.getPaidRequestsFront();
         return new ResponseEntity(requestFrontDTOs, HttpStatus.OK);
     }
 
@@ -64,5 +71,12 @@ public class RequestController {
             }
         }
 
+    }
+
+    @GetMapping(value="/pending/number")
+    public ResponseEntity<?> getPendingRequestsNumber(){
+
+        int num = this.requestService.getPendingRequestsNumber();
+        return new ResponseEntity(num,HttpStatus.OK);
     }
 }
