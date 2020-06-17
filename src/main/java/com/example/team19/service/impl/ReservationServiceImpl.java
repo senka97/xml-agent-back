@@ -1,20 +1,21 @@
 package com.example.team19.service.impl;
 
-import com.example.team19.dto.ReservationDTO;
-import com.example.team19.dto.ReservationResponseDTO;
+import com.example.team19.dto.*;
 import com.example.team19.enums.RequestStatus;
 import com.example.team19.model.Advertisement;
+import com.example.team19.model.Car;
 import com.example.team19.model.Request;
 import com.example.team19.model.Reservation;
 import com.example.team19.repository.ReservationRepository;
+import com.example.team19.service.CarService;
 import com.example.team19.service.ReservationService;
 import com.example.team19.soap.RentClient;
 import com.example.team19.wsdl.AddReservationResponse;
-import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +30,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     private RequestServiceImpl requestService;
+
+    @Autowired
+    private CarService carService;
 
     @Autowired
     private RentClient rentClient;
@@ -139,5 +143,61 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.findReservationsForThisAd(adId);
     }
 
+    @Override
+    public List<ReservationFrontDTO> getReservationsFront() {
 
+        List<ReservationFrontDTO> reservationFrontDTOs = new ArrayList<>();
+        List<Reservation> reservations = reservationRepository.findAll();
+
+        if(reservations.size() == 0){
+            return reservationFrontDTOs;
+        }
+
+        for(Reservation r : reservations)
+        {
+            ReservationFrontDTO newR = new ReservationFrontDTO();
+            newR.setId(r.getId());
+            newR.setMainId(r.getMainId());
+            newR.setStartDate(r.getStartDate());
+            newR.setEndDate(r.getEndDate());
+            newR.setCurrentPricePerKm(r.getCurrentPricePerKm());
+            newR.setClientFirstName(r.getClientFirstName());
+            newR.setClientLastName(r.getClientLastName());
+            newR.setClientEmail(r.getClientEmail());
+            newR.setClientPhoneNumber(r.getClientPhoneNumber());
+            newR.setPayment(r.getPayment());
+
+            Advertisement ad = this.adService.findById(r.getAdvertisement().getId());
+            AdFrontDTO newAd = new AdFrontDTO();
+
+            newAd.setId(ad.getId());
+            newAd.setMainId(ad.getMainId());
+            newAd.setStartDate(ad.getStartDate());
+            newAd.setEndDate(ad.getEndDate());
+            newAd.setLimitKm(ad.getLimitKm());
+            newAd.setLocation(ad.getLocation());
+            newAd.setCdw(ad.getCdw());
+
+            Car car = this.carService.findById(ad.getCar().getId());
+            CarFrontDTO c = new CarFrontDTO();
+
+            c.setId(car.getId());
+            c.setMainId(car.getMainId());
+            ArrayList<String> photos = this.carService.getCarPhotos(c.getId());
+            c.setPhoto64(photos.get(0));
+            c.setCarModel(car.getCarModel().getName());
+            c.setCarBrand(car.getCarModel().getCarBrand().getName());
+            c.setMileage(car.getMileage());
+            c.setChildrenSeats(car.getChildrenSeats());
+            c.setRate(car.getRate());
+
+            newAd.setCar(c);
+
+            newR.setAd(newAd);
+
+            reservationFrontDTOs.add(newR);
+        }
+
+        return reservationFrontDTOs;
+    }
 }

@@ -18,4 +18,11 @@ public interface RequestRepository extends JpaRepository<Request,Long> {
 
        @Query(value="FROM Request r inner join r.requestAds ra WHERE r.status='Paid' AND ra.advertisement.id=?1 AND ((ra.startDate<?2 AND ra.endDate>=?2) OR (ra.startDate>=?2 AND ra.endDate<=?3) OR (ra.startDate<=?3 AND ra.endDate>?3) OR (ra.startDate<?2 AND ra.endDate>?3))")
        List<Request> findPaidRequestsForAdForThisPeriod(Long id, LocalDate startDate, LocalDate endDate);
+
+       @Query(value="FROM Request r WHERE r.status='Paid'")
+       List<Request> findPaidRequestsFront();
+
+       @Query(value="FROM Request r WHERE r.status='Pending'")
+       List<Request> findPendingRequestsFront();
+
 }

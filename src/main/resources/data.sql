@@ -107,3 +107,8 @@ insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_li
 --insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-06-01','2020-06-30','0',false,3,2, 'Beograd');
 
 --insert into comment (from_comment,content,car_id) value ('Pera','<iframe src="javascript:alert(`xss`)">',1);
+
+insert into request (main_id, status, client_first_name, client_last_name, client_phone_number, client_email ) values (1,'Paid', 'Client1' ,'Client', '123456789', 'client@gmail.com' );
+insert into request_ad (main_id, advertisement_id, current_price_per_km, payment, start_date, end_date, request_id) values (1,1,3,125,'2020-06-04','2020-06-08',1);
+
+insert into reservation (main_id, advertisement_id, start_date, end_date, current_price_per_km, client_first_name, client_last_name,client_email, client_phone_number, payment) values (1,1,'2020-06-12','2020-06-14',3,'Petar', 'Petrovic','petar@gmail.com','061265835',150);

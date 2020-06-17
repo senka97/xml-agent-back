@@ -1,18 +1,25 @@
 package com.example.team19.service.impl;
 
+import com.example.team19.dto.AdFrontDTO;
+import com.example.team19.dto.CarFrontDTO;
+import com.example.team19.dto.RequestAdFrontDTO;
 import com.example.team19.dto.RequestFrontDTO;
 import com.example.team19.enums.RequestStatus;
 import com.example.team19.model.Advertisement;
+import com.example.team19.model.Car;
 import com.example.team19.model.Request;
 import com.example.team19.model.RequestAd;
 import com.example.team19.repository.RequestRepository;
+import com.example.team19.service.CarService;
 import com.example.team19.service.RequestService;
 import com.example.team19.soap.RentClient;
+
 import com.example.team19.wsdl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +31,9 @@ public class RequestServiceImpl implements RequestService {
     private RentClient rentClient;
     @Autowired
     private AdServiceImpl adService;
+
+    @Autowired
+    private CarService carService;
 
 
     @Override
@@ -78,8 +88,97 @@ public class RequestServiceImpl implements RequestService {
         }
 
         //ovde se naprave dto za front i vrate
+        List<RequestFrontDTO> requestFrontDTOs = new ArrayList<>();
+        List<Request> pendingRequests = this.requestRepository.findPendingRequestsFront();
 
-        return null;
+        if(pendingRequests.size() == 0){
+            return requestFrontDTOs;
+        }
+        requestFrontDTOs = makeRequestFrontDTOs(pendingRequests);
+
+        return requestFrontDTOs;
+    }
+
+    @Override
+    public List<RequestFrontDTO> getPaidRequestsFront() {
+
+        List<Request> paidRequests = this.requestRepository.findPaidRequestsFront();
+        List<RequestFrontDTO> requestFrontDTOs = new ArrayList<>();
+
+        if(paidRequests.size() == 0){
+            return requestFrontDTOs;
+        }
+        requestFrontDTOs = makeRequestFrontDTOs(paidRequests);
+
+        return requestFrontDTOs;
+
+    }
+
+    public List<RequestFrontDTO> makeRequestFrontDTOs(List<Request> requests) {
+
+        List<RequestFrontDTO> requestFrontDTOs = new ArrayList<>();
+
+        for (Request r : requests)
+        {
+            RequestFrontDTO requestFrontDTO = new RequestFrontDTO();
+
+            requestFrontDTO.setId(r.getId());
+            requestFrontDTO.setMainId(r.getMainId());
+            requestFrontDTO.setStatus(r.getStatus().toString());
+            requestFrontDTO.setClientName(r.getClientFirstName());
+            requestFrontDTO.setClientLastName(r.getClientLastName());
+            requestFrontDTO.setClientPhoneNumber(r.getClientPhoneNumber());
+            requestFrontDTO.setClientEmail(r.getClientEmail());
+
+            List<RequestAdFrontDTO> requestAdFrontDTOs = new ArrayList<>();
+
+            for(RequestAd ra : r.getRequestAds() )
+            {
+                RequestAdFrontDTO requestAdFrontDTO = new RequestAdFrontDTO();
+
+                requestAdFrontDTO.setId(ra.getId());
+                requestAdFrontDTO.setMainId(ra.getMainId());
+                requestAdFrontDTO.setStartDate(ra.getStartDate());
+                requestAdFrontDTO.setEndDate(ra.getEndDate());
+                requestAdFrontDTO.setCurrentPricePerKm(ra.getCurrentPricePerKm());
+                requestAdFrontDTO.setPayment(ra.getPayment());
+
+                Advertisement ad = this.adService.findById(ra.getAdvertisement().getId());
+                AdFrontDTO a = new AdFrontDTO();
+
+                a.setId(ad.getId());
+                a.setMainId(ad.getMainId());
+                a.setStartDate(ad.getStartDate());
+                a.setEndDate(ad.getEndDate());
+                a.setLimitKm(ad.getLimitKm());
+                a.setLocation(ad.getLocation());
+                a.setCdw(ad.getCdw());
+
+                Car car = this.carService.findById(ad.getCar().getId());
+                CarFrontDTO c = new CarFrontDTO();
+
+                c.setId(car.getId());
+                c.setMainId(car.getMainId());
+                ArrayList<String> photos = this.carService.getCarPhotos(c.getId());
+                c.setPhoto64(photos.get(0));
+                c.setCarModel(car.getCarModel().getName());
+                c.setCarBrand(car.getCarModel().getCarBrand().getName());
+                c.setMileage(car.getMileage());
+                c.setChildrenSeats(car.getChildrenSeats());
+                c.setRate(car.getRate());
+
+                a.setCar(c);
+                requestAdFrontDTO.setAd(a);
+
+                requestAdFrontDTOs.add(requestAdFrontDTO);
+
+            }
+
+            requestFrontDTO.setRequestAds(requestAdFrontDTOs);
+            requestFrontDTOs.add(requestFrontDTO);
+        }
+
+        return requestFrontDTOs;
     }
 
     @Override
@@ -127,6 +226,13 @@ public class RequestServiceImpl implements RequestService {
             this.requestRepository.save(r);
             return apResponse.getMessage();
         }
+    }
+
+    @Override
+    public int getPendingRequestsNumber() {
+
+        List<Request> pendingRequests = this.requestRepository.findPendingRequestsFront();
+        return pendingRequests.size();
     }
 
     @Override
