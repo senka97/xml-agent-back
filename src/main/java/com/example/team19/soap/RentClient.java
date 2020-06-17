@@ -96,4 +96,38 @@ public class RentClient extends WebServiceGatewaySupport {
         return response;
 
     }
+
+    public GetMessagesResponse getMessagesFromMainApp(Long mainIdRequest, List<Long> existingMessages){
+
+        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        getWebServiceTemplate().setMessageSender(sender);
+
+        LoginResponse loginResponse = loginClient.login();
+        GetMessagesRequest gmr = new GetMessagesRequest();
+        gmr.setMainIdRequest(mainIdRequest);
+        gmr.getExistingMessages().addAll(existingMessages);
+
+        GetMessagesResponse response = (GetMessagesResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(gmr,
+                        new SoapRequestHeaderModifier(loginResponse.getToken()));
+        return response;
+    }
+
+    public AddMessageResponse addMessage(Long mainIdRequest, String content){
+
+        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        getWebServiceTemplate().setMessageSender(sender);
+
+        LoginResponse loginResponse = loginClient.login();
+        AddMessageRequest amr = new AddMessageRequest();
+        amr.setMainIdRequest(mainIdRequest);
+        amr.setContent(content);
+
+        AddMessageResponse response = (AddMessageResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(amr,
+                        new SoapRequestHeaderModifier(loginResponse.getToken()));
+        return response;
+    }
 }
