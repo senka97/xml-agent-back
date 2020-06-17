@@ -1,52 +1,41 @@
-package com.example.team19.model;
+package com.example.team19.dto;
 
-import com.example.team19.dto.ReservationDTO;
+import com.example.team19.model.Advertisement;
+import com.example.team19.model.Reservation;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-public class Reservation {
+public class ReservationResponseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="startDate")
     private LocalDate startDate;
-    @Column(name="endDate")
     private LocalDate endDate;
-    @Column(name="clientFirstName")
     private String clientFirstName;
-    @Column(name="clientLastName")
     private String clientLastName;
-    @Column(name="clientEmail")
     private String clientEmail;
-    @Column(name="clientPhoneNumber")
     private String clientPhoneNumber;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Advertisement advertisement;
+    private Long adId;
+    private double currentPricePerKm;
+    private double payment;
+    private Long mainId;
 
-    @Column(name="currentPricePerKm")
-    private double currentPricePerKm; //ovo sam ubacila jer ima i na glavnoj
-    @Column(name="payment")
-    private double payment; //isto, racunace se ovde, a ne u glavnoj
-    @Column(name="mainId")
-    private Long mainId; //ovo je id ove rezervacije na glavnoj
-
-
-
-
-    public Reservation(){
+    public ReservationResponseDTO(){
 
     }
 
-    public Reservation(ReservationDTO reservationDTO){
-        this.clientFirstName = reservationDTO.getClientFirstName();
-        this.clientLastName = reservationDTO.getClientLastName();
-        this.clientEmail = reservationDTO.getClientEmail();
-        this.clientPhoneNumber = reservationDTO.getClientPhoneNumber();
-        this.startDate = reservationDTO.getStartDate();
-        this.endDate = reservationDTO.getEndDate();
+    public ReservationResponseDTO(Reservation reservation){
+        this.id = reservation.getId();
+        this.startDate = reservation.getStartDate();
+        this.endDate = reservation.getEndDate();
+        this.clientFirstName = reservation.getClientFirstName();
+        this.clientLastName = reservation.getClientLastName();
+        this.clientEmail = reservation.getClientEmail();
+        this.clientPhoneNumber = reservation.getClientPhoneNumber();
+        this.adId = reservation.getAdvertisement().getId();
+        this.currentPricePerKm = reservation.getCurrentPricePerKm();
+        this.payment = reservation.getPayment();
+        this.mainId = reservation.getMainId();
     }
 
     public Long getId() {
@@ -105,12 +94,12 @@ public class Reservation {
         this.clientPhoneNumber = clientPhoneNumber;
     }
 
-    public Advertisement getAdvertisement() {
-        return advertisement;
+    public Long getAdId() {
+        return adId;
     }
 
-    public void setAdvertisement(Advertisement advertisement) {
-        this.advertisement = advertisement;
+    public void setAdId(Long adId) {
+        this.adId = adId;
     }
 
     public double getCurrentPricePerKm() {

@@ -57,6 +57,7 @@ public class AdServiceImpl implements AdService {
         return advertisements;
     }
 
+
     @Override
     public ArrayList<AdDTO2> getAllAds()
     {
@@ -450,5 +451,10 @@ public class AdServiceImpl implements AdService {
     }
     public static boolean isFuelType(String value) {
         return Arrays.stream(FuelType.values()).anyMatch(e -> e.name().equals(value));
+    }
+
+    @Override
+    public Advertisement findAdByMainId(Long id) {
+        return this.adRepository.findByMainId(id);
     }
 }

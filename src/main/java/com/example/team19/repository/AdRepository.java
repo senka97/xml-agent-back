@@ -18,4 +18,6 @@ public interface AdRepository extends JpaRepository<Advertisement,Long> {
     @Query(value = "SELECT * FROM advertisement a WHERE a.end_date >= ?1 "  , nativeQuery = true)
     ArrayList<Advertisement> findActiveAds(LocalDate now);
 
+    Advertisement findByMainId(Long id);
+
 }
