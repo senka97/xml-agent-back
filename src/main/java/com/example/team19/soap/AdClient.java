@@ -2,6 +2,7 @@ package com.example.team19.soap;
 
 import com.example.team19.config.UnTrustworthyTrustManager;
 import com.example.team19.dto.AdDTO;
+import com.example.team19.dto.PriceListRequestDTO;
 import com.example.team19.service.impl.CarServiceImpl;
 import com.example.team19.service.impl.PriceListServiceImpl;
 import com.example.team19.wsdl.*;
@@ -138,6 +139,43 @@ public class AdClient extends WebServiceGatewaySupport {
                 .marshalSendAndReceive(request,
                         new SoapRequestHeaderModifier(loginResponse.getToken()));
 
+        return response;
+    }
+
+    public AddPriceListResponse addPriceList(PriceListRequestDTO priceListRequestDTO){
+
+        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        getWebServiceTemplate().setMessageSender(sender);
+
+        LoginResponse loginResponse = loginClient.login();
+        AddPriceListRequest apr = new AddPriceListRequest();
+        apr.setAlias(priceListRequestDTO.getAlias());
+        apr.setPricePerDay(priceListRequestDTO.getPricePerDay());
+        apr.setPricePerKm(priceListRequestDTO.getPricePerKm());
+        apr.setPriceForCdw(priceListRequestDTO.getPriceForCdw());
+        apr.setDiscount20Days(priceListRequestDTO.getDiscount20Days());
+        apr.setDiscount30Days(priceListRequestDTO.getDiscount30Days());
+
+        AddPriceListResponse response = (AddPriceListResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(apr,
+                        new SoapRequestHeaderModifier(loginResponse.getToken()));
+        return response;
+    }
+
+    public DeletePriceListResponse deletePriceList(Long mainId){
+
+        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        getWebServiceTemplate().setMessageSender(sender);
+
+        LoginResponse loginResponse = loginClient.login();
+        DeletePriceListRequest dpr = new DeletePriceListRequest();
+        dpr.setMainId(mainId);
+
+        DeletePriceListResponse response = (DeletePriceListResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(dpr,
+                        new SoapRequestHeaderModifier(loginResponse.getToken()));
         return response;
     }
 

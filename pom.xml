@@ -135,6 +135,9 @@
                         <schema>
                             <url>http://localhost:8084/ws/message.wsdl</url>
                         </schema>
+                        <schema>
+                            <url>http://localhost:8085/ws/priceList.wsdl</url>
+                        </schema>
                    </schemas>
                </configuration>
            </plugin>

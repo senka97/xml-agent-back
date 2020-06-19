@@ -1,6 +1,7 @@
 package com.example.team19.service;
 
 import com.example.team19.dto.PriceListDTO;
+import com.example.team19.dto.PriceListRequestDTO;
 import com.example.team19.model.PriceList;
 
 
@@ -10,7 +11,8 @@ public interface PriceListService {
 
     PriceList findById(Long id);
     ArrayList<PriceListDTO> getAll();
-    PriceList createPriceList(PriceListDTO priceList);
-    Boolean deletePriceList(Long id);
+    PriceListDTO createPriceList(PriceListRequestDTO priceListRequestDTO);
+    String deletePriceList(Long id);
     PriceList save(PriceList priceList);
+    PriceList findByAlias(String alias);
 }

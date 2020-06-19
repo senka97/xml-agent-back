@@ -5,7 +5,9 @@ import com.example.team19.dto.AdDTO2;
 import com.example.team19.dto.AdSearchDTO;
 import com.example.team19.model.Advertisement;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public interface AdService {
@@ -19,4 +21,5 @@ public interface AdService {
     Advertisement findById(Long id);
     ArrayList<Advertisement> findActiveAds();
     Advertisement findAdByMainId(Long id);
+    List<Advertisement> findActiveAdsForThisPriceList(Long id, LocalDate now);
 }
