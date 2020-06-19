@@ -1,6 +1,9 @@
 package com.example.team19.model;
 
+import com.example.team19.dto.PriceListRequestDTO;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,6 +16,8 @@ public class PriceList {
     private double pricePerKm;
     @Column(name="pricePerDay")
     private double pricePerDay;
+    @Column(name="priceForCdw")
+    private double priceForCdw;
     @Column(name="discount20Days")
     private int discount20Days;
     @Column(name="discount30Days")
@@ -23,9 +28,22 @@ public class PriceList {
     private Set<Advertisement> advertisements;
     @Column(name="mainId")
     private Long mainId;
+    @Column(name="removed")
+    private boolean removed;
 
     public PriceList(){
 
+    }
+
+    public PriceList(PriceListRequestDTO plr){
+        this.alias = plr.getAlias();
+        this.pricePerDay = plr.getPricePerDay();
+        this.pricePerKm = plr.getPricePerKm();
+        this.priceForCdw = plr.getPriceForCdw();
+        this.discount20Days = plr.getDiscount20Days();
+        this.discount30Days = plr.getDiscount30Days();
+        this.removed = false;
+        this.advertisements = new HashSet<>();
     }
 
     public Long getId() {
@@ -90,5 +108,21 @@ public class PriceList {
 
     public void setMainId(Long mainId) {
         this.mainId = mainId;
+    }
+
+    public double getPriceForCdw() {
+        return priceForCdw;
+    }
+
+    public void setPriceForCdw(double priceForCdw) {
+        this.priceForCdw = priceForCdw;
+    }
+
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(boolean removed) {
+        this.removed = removed;
     }
 }

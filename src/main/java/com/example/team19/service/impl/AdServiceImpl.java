@@ -457,4 +457,9 @@ public class AdServiceImpl implements AdService {
     public Advertisement findAdByMainId(Long id) {
         return this.adRepository.findByMainId(id);
     }
+
+    @Override
+    public List<Advertisement> findActiveAdsForThisPriceList(Long id, LocalDate now) {
+        return this.adRepository.findActiveAdsWithThisPriceList(id, now);
+    }
 }

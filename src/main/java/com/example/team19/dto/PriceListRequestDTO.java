@@ -1,41 +1,16 @@
 package com.example.team19.dto;
 
-import com.example.team19.model.PriceList;
+public class PriceListRequestDTO {
 
-
-public class PriceListDTO {
-
-    private Long id;
     private double pricePerKm;
     private double pricePerDay;
     private double priceForCdw;
     private int discount20Days;
     private int discount30Days;
     private String alias;
-    private Long mainId;
 
-    public PriceListDTO()
-    {
+    public PriceListRequestDTO(){
 
-    }
-
-    public PriceListDTO(PriceList priceList){
-        this.id = priceList.getId();
-        this.pricePerDay = priceList.getPricePerDay();
-        this.pricePerKm = priceList.getPricePerKm();
-        this.priceForCdw = priceList.getPriceForCdw();
-        this.discount20Days = priceList.getDiscount20Days();
-        this.discount30Days = priceList.getDiscount30Days();
-        this.alias = priceList.getAlias();
-        this.mainId = priceList.getMainId();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public double getPricePerKm() {
@@ -52,6 +27,14 @@ public class PriceListDTO {
 
     public void setPricePerDay(double pricePerDay) {
         this.pricePerDay = pricePerDay;
+    }
+
+    public double getPriceForCdw() {
+        return priceForCdw;
+    }
+
+    public void setPriceForCdw(double priceForCdw) {
+        this.priceForCdw = priceForCdw;
     }
 
     public int getDiscount20Days() {
@@ -76,21 +59,5 @@ public class PriceListDTO {
 
     public void setAlias(String alias) {
         this.alias = alias;
-    }
-
-    public Long getMainId() {
-        return mainId;
-    }
-
-    public void setMainId(Long mainId) {
-        this.mainId = mainId;
-    }
-
-    public double getPriceForCdw() {
-        return priceForCdw;
-    }
-
-    public void setPriceForCdw(double priceForCdw) {
-        this.priceForCdw = priceForCdw;
     }
 }

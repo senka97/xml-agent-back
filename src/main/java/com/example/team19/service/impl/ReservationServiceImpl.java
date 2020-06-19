@@ -108,9 +108,25 @@ public class ReservationServiceImpl implements ReservationService {
         if(days<20){
             payment = days*ad.getPriceList().getPricePerDay();
         }else if(days>=20 && days<30){
-            payment = days*ad.getPriceList().getPricePerDay() - (ad.getPriceList().getDiscount20Days()/100)*(days*ad.getPriceList().getPricePerDay());
+            if(ad.getPriceList().getDiscount20Days() > 0) { //ako postoji popust za vise od 20 dana
+                payment = days * ad.getPriceList().getPricePerDay() - (ad.getPriceList().getDiscount20Days() / 100) * (days * ad.getPriceList().getPricePerDay());
+            }else{
+                payment = days*ad.getPriceList().getPricePerDay();
+            }
         }else{
-            payment = days*ad.getPriceList().getPricePerDay() - (ad.getPriceList().getDiscount30Days()/100)*(days*ad.getPriceList().getPricePerDay());
+            if(ad.getPriceList().getDiscount30Days() > 0) { //ako postoji popust za vise od 30 dana
+                payment = days * ad.getPriceList().getPricePerDay() - (ad.getPriceList().getDiscount30Days() / 100) * (days * ad.getPriceList().getPricePerDay());
+            }else{ //ako ne postoji za vise od 30, proverim da li postoji za vise od 20 dana
+                if(ad.getPriceList().getDiscount20Days() > 0){
+                    payment = days * ad.getPriceList().getPricePerDay() - (ad.getPriceList().getDiscount20Days() / 100) * (days * ad.getPriceList().getPricePerDay());
+                }else{ //ako ne postoji ni za vise od 20 dana
+                    payment = days*ad.getPriceList().getPricePerDay();
+                }
+            }
+        }
+        //proverim da li oglas ukljucuje cdw i dodam i cenu za to
+        if(ad.getCdw()){
+            payment += ad.getPriceList().getPriceForCdw();
         }
 
         AddReservationResponse arr = this.rentClient.addReservation(reservationDTO, ad.getMainId(),

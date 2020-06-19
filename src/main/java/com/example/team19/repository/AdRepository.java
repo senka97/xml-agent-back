@@ -20,4 +20,7 @@ public interface AdRepository extends JpaRepository<Advertisement,Long> {
 
     Advertisement findByMainId(Long id);
 
+    @Query("FROM Advertisement ad WHERE ad.priceList.id=?1 AND ad.endDate>=?2")
+    List<Advertisement> findActiveAdsWithThisPriceList(Long id, LocalDate now);
+
 }
