@@ -13,4 +13,6 @@ public interface ReservationService {
     ReservationResponseDTO createNewReservation(ReservationDTO r);
     Set<Reservation> findReservationsForThisAd(Long id);
     List<ReservationFrontDTO> getReservationsFront();
+    Reservation findById(Long reservationId);
+    Reservation save(Reservation reservation);
 }

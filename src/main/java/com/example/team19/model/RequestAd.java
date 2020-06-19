@@ -28,6 +28,12 @@ public class RequestAd {
     @Column(name="mainId")
     private Long mainId;
 
+    @OneToOne(mappedBy = "requestAd")
+    private Report report;
+
+    @Column(name = "reportCreated")
+    private Boolean reportCreated = false;
+
     public RequestAd(){
 
     }
@@ -94,5 +100,21 @@ public class RequestAd {
 
     public void setMainId(Long mainId) {
         this.mainId = mainId;
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
+    }
+
+    public Boolean getReportCreated() {
+        return reportCreated;
+    }
+
+    public void setReportCreated(Boolean reportCreated) {
+        this.reportCreated = reportCreated;
     }
 }

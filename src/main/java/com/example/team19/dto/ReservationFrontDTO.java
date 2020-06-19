@@ -26,6 +26,8 @@ public class ReservationFrontDTO {
 
     private AdFrontDTO ad;
 
+    private boolean reportCreated;
+
     public ReservationFrontDTO()
     {
 
@@ -119,4 +121,11 @@ public class ReservationFrontDTO {
         this.ad = ad;
     }
 
+    public boolean isReportCreated() {
+        return reportCreated;
+    }
+
+    public void setReportCreated(boolean reportCreated) {
+        this.reportCreated = reportCreated;
+    }
 }

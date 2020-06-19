@@ -130,4 +130,46 @@ public class RentClient extends WebServiceGatewaySupport {
                         new SoapRequestHeaderModifier(loginResponse.getToken()));
         return response;
     }
+
+    public CreateRequestReportResponse createRequestReport(Long requestAdId, String content, double km)
+    {
+        CreateRequestReportRequest request = new CreateRequestReportRequest();
+        ReportSOAP report = new ReportSOAP();
+        report.setContent(content);
+        report.setKm(km);
+        report.setRequestAdId(requestAdId);
+        request.setReportSOAP(report);
+
+        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        getWebServiceTemplate().setMessageSender(sender);
+
+        LoginResponse loginResponse = loginClient.login();
+
+        CreateRequestReportResponse response = (CreateRequestReportResponse) getWebServiceTemplate().marshalSendAndReceive(
+                request, new SoapRequestHeaderModifier(loginResponse.getToken()));
+
+        return response;
+    }
+
+    public CreateReservationReportResponse createReservationReport(Long reservationId, String content, double km)
+    {
+        CreateReservationReportRequest request = new CreateReservationReportRequest();
+        ReportSOAP report = new ReportSOAP();
+        report.setContent(content);
+        report.setKm(km);
+        report.setReservationId(reservationId);
+        request.setReportSOAP(report);
+
+        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        getWebServiceTemplate().setMessageSender(sender);
+
+        LoginResponse loginResponse = loginClient.login();
+
+        CreateReservationReportResponse response = (CreateReservationReportResponse) getWebServiceTemplate().marshalSendAndReceive(
+                request, new SoapRequestHeaderModifier(loginResponse.getToken()));
+
+        return response;
+    }
 }

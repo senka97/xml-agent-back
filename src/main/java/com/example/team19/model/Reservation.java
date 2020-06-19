@@ -33,7 +33,11 @@ public class Reservation {
     @Column(name="mainId")
     private Long mainId; //ovo je id ove rezervacije na glavnoj
 
+    @OneToOne(mappedBy = "reservation")
+    private Report report;
 
+    @Column(name = "reportCreated")
+    private Boolean reportCreated = false;
 
 
     public Reservation(){
@@ -135,5 +139,21 @@ public class Reservation {
 
     public void setMainId(Long mainId) {
         this.mainId = mainId;
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
+    }
+
+    public Boolean getReportCreated() {
+        return reportCreated;
+    }
+
+    public void setReportCreated(Boolean reportCreated) {
+        this.reportCreated = reportCreated;
     }
 }

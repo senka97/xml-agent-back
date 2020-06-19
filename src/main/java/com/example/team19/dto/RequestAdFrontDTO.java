@@ -18,6 +18,8 @@ public class RequestAdFrontDTO {
 
     private AdFrontDTO ad;
 
+    private boolean reportCreated;
+
     public RequestAdFrontDTO(){
 
     }
@@ -76,5 +78,13 @@ public class RequestAdFrontDTO {
 
     public void setMainId(Long mainId) {
         this.mainId = mainId;
+    }
+
+    public boolean isReportCreated() {
+        return reportCreated;
+    }
+
+    public void setReportCreated(boolean reportCreated) {
+        this.reportCreated = reportCreated;
     }
 }

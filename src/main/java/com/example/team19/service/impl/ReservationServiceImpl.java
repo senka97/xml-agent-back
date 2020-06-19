@@ -160,6 +160,18 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public Reservation findById(Long reservationId) {
+
+        return this.reservationRepository.findById(reservationId).orElse(null);
+    }
+
+    @Override
+    public Reservation save(Reservation reservation) {
+
+        return this.reservationRepository.save(reservation);
+    }
+
+    @Override
     public List<ReservationFrontDTO> getReservationsFront() {
 
         List<ReservationFrontDTO> reservationFrontDTOs = new ArrayList<>();
@@ -182,6 +194,7 @@ public class ReservationServiceImpl implements ReservationService {
             newR.setClientEmail(r.getClientEmail());
             newR.setClientPhoneNumber(r.getClientPhoneNumber());
             newR.setPayment(r.getPayment());
+            newR.setReportCreated(r.getReportCreated());
 
             Advertisement ad = this.adService.findById(r.getAdvertisement().getId());
             AdFrontDTO newAd = new AdFrontDTO();
