@@ -142,6 +142,7 @@ public class RequestServiceImpl implements RequestService {
                 requestAdFrontDTO.setEndDate(ra.getEndDate());
                 requestAdFrontDTO.setCurrentPricePerKm(ra.getCurrentPricePerKm());
                 requestAdFrontDTO.setPayment(ra.getPayment());
+                requestAdFrontDTO.setReportCreated(ra.getReportCreated());
 
                 Advertisement ad = this.adService.findById(ra.getAdvertisement().getId());
                 AdFrontDTO a = new AdFrontDTO();
