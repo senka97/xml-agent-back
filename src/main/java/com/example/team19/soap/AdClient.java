@@ -88,6 +88,7 @@ public class AdClient extends WebServiceGatewaySupport {
             priceList.setDiscount30Days(existingPl.getDiscount30Days());
             priceList.setPricePerDay(existingPl.getPricePerDay());
             priceList.setPricePerKm(existingPl.getPricePerKm());
+            priceList.setPriceForCdw(existingPl.getPriceForCdw());
         }
 
 
@@ -116,6 +117,7 @@ public class AdClient extends WebServiceGatewaySupport {
                 car.setId(existingCar.getMainId());
             }else{
                 car.setId(0);
+                car.setRate(existingCar.getRate());
             }
 
         }else{
