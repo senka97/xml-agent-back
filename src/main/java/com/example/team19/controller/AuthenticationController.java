@@ -33,12 +33,6 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest,
@@ -58,7 +52,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new UserTokenState(jwt, expiresIn)); //this dto object contains the token which is sent to the client
     }
 
-    @RequestMapping(value = "/changePassword", method = RequestMethod.PUT)
+   /* @RequestMapping(value = "/changePassword", method = RequestMethod.PUT)
     @PreAuthorize("hasRole('ROLE_AGENT')")
     public ResponseEntity<?> changePassword(@RequestBody PasswordChanger passwordChanger) {
         System.out.println("Radi autorizacija");
@@ -69,6 +63,6 @@ public class AuthenticationController {
     static class PasswordChanger {
         public String oldPassword;
         public String newPassword;
-    }
+    }*/
 
 }

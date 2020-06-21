@@ -68,9 +68,9 @@ public class ReportServiceImpl implements ReportService {
                         reportRepository.save(r);
                         return true;
                     }
-                    else return null;
+                    else return false;
                 }
-                else return null;
+                else return false;
             }
             else return false;
         }
@@ -109,9 +109,9 @@ public class ReportServiceImpl implements ReportService {
                         reportRepository.save(r);
                         return true;
                     }
-                    else return null;
+                    else return false;
                 }
-                else return null;
+                else return false;
             }
             else return false;
         }
