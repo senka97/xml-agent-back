@@ -23,7 +23,7 @@ public class ReportController {
         if(this.reportService.createRequestReport(report.getRequestAdId(), report.getContent(), report.getKm())){
             return new ResponseEntity("Report successfully created", HttpStatus.CREATED);
         }
-        else return new ResponseEntity<>("Request not found", HttpStatus.BAD_REQUEST);
+        else return new ResponseEntity<>("Something went wrong, error saving report", HttpStatus.BAD_REQUEST);
 
     }
 
@@ -34,7 +34,7 @@ public class ReportController {
         {
             return new ResponseEntity("Report successfully created", HttpStatus.CREATED);
         }
-        else return new ResponseEntity<>("Reservation not found", HttpStatus.BAD_REQUEST);
+        else return new ResponseEntity<>("Something went wrong, error saving report", HttpStatus.BAD_REQUEST);
 
     }
 

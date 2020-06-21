@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // allow all users to access paths /auth/**, /h2-console/**
                 .authorizeRequests().antMatchers("/auth/**").permitAll().antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/login", "/registration" ,"/newAd", "/reserveCar", "/statistic", "/priceList", "/requests/**", "/newRequests").permitAll()
                 .anyRequest().authenticated().and()
                 .cors().and() //Cross Origin Resource Sharing, every request that doesn't come from for example a server where is Angular(4200) will be rejected
 
