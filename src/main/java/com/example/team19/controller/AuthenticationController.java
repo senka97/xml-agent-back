@@ -5,6 +5,8 @@ import com.example.team19.model.Agent;
 import com.example.team19.security.TokenUtils;
 import com.example.team19.security.auth.JwtAuthenticationRequest;
 import com.example.team19.service.impl.CustomUserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,11 +35,14 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest,
                                                        HttpServletResponse response) throws AuthenticationException, IOException {
 
+        logger.info("Login");
         //System.out.println(passwordEncoder.encode("agent"));
         final Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
