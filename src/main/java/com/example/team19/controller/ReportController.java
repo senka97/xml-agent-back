@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/api/reports", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
@@ -18,23 +20,64 @@ public class ReportController {
     private ReportService reportService;
 
     @PostMapping(value = "/request",consumes = "application/json")
-    public ResponseEntity<?> createRequestReport(@RequestBody ReportDTO report){
+    public ResponseEntity<?> createRequestReport(@Valid @RequestBody ReportDTO report){
+
+        if(report.getRequestAdId() != null)
+        {
+            if(report.getRequestAdId() < 0)
+            {
+                //logger.error("BR - RequestAdID can't be negative number");
+                return new ResponseEntity<>("Id can't be negative number", HttpStatus.BAD_REQUEST);
+            }
+
+        }
+        else
+        {
+            //logger.error("BR - RequestAdID can't be null");
+            return new ResponseEntity<>("Id can't be null", HttpStatus.BAD_REQUEST);
+        }
+
 
         if(this.reportService.createRequestReport(report.getRequestAdId(), report.getContent(), report.getKm())){
+            //logger.info("Creating report-For requestAdID: " + report.getRequestAdId() + " created");
             return new ResponseEntity("Report successfully created", HttpStatus.CREATED);
         }
-        else return new ResponseEntity<>("Something went wrong, error saving report", HttpStatus.BAD_REQUEST);
-
+        else
+        {
+            //logger.info("Creating report-For requestAdID: " + report.getRequestAdId() + " couldn't be created");
+            return new ResponseEntity<>("Error creating report", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping(value = "/reservation",consumes = "application/json")
-    public ResponseEntity<?> createReservationReport(@RequestBody ReportDTO report){
+    public ResponseEntity<?> createReservationReport(@Valid @RequestBody ReportDTO report){
+
+        if(report.getReservationId() != null)
+        {
+            if(report.getReservationId() < 0)
+            {
+               // logger.error("BR-ReservationID can't be negative number");
+                return new ResponseEntity<>("Id can't be negative number", HttpStatus.BAD_REQUEST);
+            }
+
+        }
+        else
+        {
+            //logger.error("BR-ReservationID can't be null");
+            return new ResponseEntity<>("Id can't be null", HttpStatus.BAD_REQUEST);
+        }
+
 
         if(this.reportService.createReservationReport(report.getReservationId(), report.getContent(), report.getKm()))
         {
+           // logger.info("Creating report-For reservationID: " + report.getReservationId() + " created");
             return new ResponseEntity("Report successfully created", HttpStatus.CREATED);
         }
-        else return new ResponseEntity<>("Something went wrong, error saving report", HttpStatus.BAD_REQUEST);
+        else
+        {
+           // logger.info("Creating report-For reservationID: " + report.getReservationId() + " couldn't be created");
+            return new ResponseEntity<>("Error creating report", HttpStatus.BAD_REQUEST);
+        }
 
     }
 
