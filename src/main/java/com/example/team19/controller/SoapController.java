@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/soap")
 public class SoapController {
@@ -24,7 +26,7 @@ public class SoapController {
     }
 
     @PutMapping(value="/comments/{id}")
-    public ResponseEntity<?> replyComments(@PathVariable("id") Long commentId, @RequestBody NewReplyDTO reply)
+    public ResponseEntity<?> replyComments(@PathVariable("id") Long commentId, @Valid @RequestBody NewReplyDTO reply)
     {
 
         SendReplyResponse srr = carClient.replyComment(commentId,reply);
