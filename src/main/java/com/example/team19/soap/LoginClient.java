@@ -28,15 +28,15 @@ public class LoginClient extends WebServiceGatewaySupport {
             loginRequest.setEmail("agent@gmail.com");
             loginRequest.setPassword("agent");
 
-            HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-            sender.setTrustManagers(new TrustManager[]{new UnTrustworthyTrustManager()});
+//            HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+//            sender.setTrustManagers(new TrustManager[]{new UnTrustworthyTrustManager()});
+//
+//            getWebServiceTemplate().setMessageSender(sender);
 
-            getWebServiceTemplate().setMessageSender(sender);
-
+            System.out.println("Dodje dovde");
             loginResponse = (LoginResponse) getWebServiceTemplate()
-                    .marshalSendAndReceive("https://localhost:8083/user-service/ws/Ad", loginRequest,
-                            new SoapActionCallback(
-                                    "http://www.rent-a-car.com/ad-service/soap/LoginRequest"));
+                    .marshalSendAndReceive(loginRequest);
+            System.out.println("Prodje");
 
             TokenInfo tokenInfo = new TokenInfo();
             tokenInfo.setToken(loginResponse.getToken());

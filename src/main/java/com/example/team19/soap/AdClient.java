@@ -43,8 +43,10 @@ public class AdClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://www.rent-a-car.com/ad-service/soap/LoginRequest"));
 
-*/      HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+*/
+
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
 
         LoginResponse loginResponse = loginClient.login();
         String startDateStr = adDTO.getStartDate().toString();
@@ -131,10 +133,9 @@ public class AdClient extends WebServiceGatewaySupport {
 
         //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
-        sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-
-        getWebServiceTemplate().setMessageSender(sender);
+        //sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
 
         PostAdResponse response = (PostAdResponse) getWebServiceTemplate()
@@ -146,9 +147,9 @@ public class AdClient extends WebServiceGatewaySupport {
 
     public AddPriceListResponse addPriceList(PriceListRequestDTO priceListRequestDTO){
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse loginResponse = loginClient.login();
         AddPriceListRequest apr = new AddPriceListRequest();
@@ -167,9 +168,9 @@ public class AdClient extends WebServiceGatewaySupport {
 
     public DeletePriceListResponse deletePriceList(Long mainId){
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse loginResponse = loginClient.login();
         DeletePriceListRequest dpr = new DeletePriceListRequest();

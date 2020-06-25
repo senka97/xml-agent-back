@@ -18,14 +18,17 @@ public class TestClient extends WebServiceGatewaySupport {
 
         //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
-        GetTestResponse response = (GetTestResponse) getWebServiceTemplate()
+        /*GetTestResponse response = (GetTestResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("https://localhost:8083/rent-service/ws/test", request,
                         new SoapActionCallback(
-                                "http://www.rent-a-car.com/rent-service/soap/GetTestRequest"));
+                                "http://www.rent-a-car.com/rent-service/soap/GetTestRequest"));*/
+
+        GetTestResponse response = (GetTestResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(request);
 
         return response;
     }

@@ -22,9 +22,9 @@ public class RentClient extends WebServiceGatewaySupport {
 
     public GetPendingRResponse getPendingRequests(List<Long> ids){
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse loginResponse = loginClient.login();
 
@@ -39,9 +39,9 @@ public class RentClient extends WebServiceGatewaySupport {
 
     public AddReservationResponse addReservation(ReservationDTO reservationDTO,Long adMainId, double pricePerKm, double payment){
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         AddReservationRequest arr = new AddReservationRequest();
         arr.setAdMainId(adMainId);
@@ -65,9 +65,9 @@ public class RentClient extends WebServiceGatewaySupport {
 
     public RejectPendingRResponse rejectPendingRequest(Long id){
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse loginResponse = loginClient.login();
         RejectPendingRRequest rpr = new RejectPendingRRequest();
@@ -82,9 +82,9 @@ public class RentClient extends WebServiceGatewaySupport {
 
     public AcceptPendingRResponse acceptPendingRequest(Long id){
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse loginResponse = loginClient.login();
         AcceptPendingRRequest apr = new AcceptPendingRRequest();
@@ -99,9 +99,9 @@ public class RentClient extends WebServiceGatewaySupport {
 
     public GetMessagesResponse getMessagesFromMainApp(Long mainIdRequest, List<Long> existingMessages){
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse loginResponse = loginClient.login();
         GetMessagesRequest gmr = new GetMessagesRequest();
@@ -116,9 +116,9 @@ public class RentClient extends WebServiceGatewaySupport {
 
     public AddMessageResponse addMessage(Long mainIdRequest, String content){
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse loginResponse = loginClient.login();
         AddMessageRequest amr = new AddMessageRequest();
@@ -140,9 +140,9 @@ public class RentClient extends WebServiceGatewaySupport {
         report.setRequestAdId(requestAdId);
         request.setReportSOAP(report);
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse loginResponse = loginClient.login();
 
@@ -161,9 +161,9 @@ public class RentClient extends WebServiceGatewaySupport {
         report.setReservationId(reservationId);
         request.setReportSOAP(report);
 
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse loginResponse = loginClient.login();
 

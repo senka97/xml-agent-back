@@ -34,9 +34,9 @@ public class CarClient extends WebServiceGatewaySupport {
 
         //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         CommentsResponse response = (CommentsResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("https://localhost:8083/car-service/ws/soap", request,
@@ -54,14 +54,17 @@ public class CarClient extends WebServiceGatewaySupport {
 
         //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+       // getWebServiceTemplate().setMessageSender(sender);
 
-        SendReplyResponse response = (SendReplyResponse) getWebServiceTemplate()
+        /*SendReplyResponse response = (SendReplyResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("https://localhost:8083/car-service/ws/soap", request,
                         new SoapActionCallback(
-                                "http://www.rent-a-car.com/car-service/soap/SendReplyRequest"));
+                                "http://www.rent-a-car.com/car-service/soap/SendReplyRequest"));*/
+
+        SendReplyResponse response = (SendReplyResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(request);
 
         return response;
     }
@@ -71,9 +74,9 @@ public class CarClient extends WebServiceGatewaySupport {
         //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
         System.out.println("Most Comments");
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse  loginResponse = loginClient.login();
 
@@ -91,9 +94,9 @@ public class CarClient extends WebServiceGatewaySupport {
         //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
         System.out.println("Best Rate");
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse  loginResponse = loginClient.login();
 
@@ -111,9 +114,9 @@ public class CarClient extends WebServiceGatewaySupport {
         //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
         System.out.println("Most Comments");
-        HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-        sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-        getWebServiceTemplate().setMessageSender(sender);
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+        //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
+       // getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse  loginResponse = loginClient.login();
 
