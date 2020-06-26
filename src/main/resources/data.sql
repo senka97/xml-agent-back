@@ -102,8 +102,8 @@ insert into photo (path, car_id) value ('./carPictures/2_2.png',2);
 insert into price_list (alias, discount20Days, discount30Days, price_per_day, price_per_km, price_for_cdw, main_id, removed) value ('Price list - agent 1', 0, 15, 25, 3, 120, 1, false);
 --insert into price_list (alias, discount20Days, discount30Days, price_per_day, price_per_km) value ('Summer Price List', 10, 20, 30, 4);
 
-insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location, main_id) value ('2020-06-01','2020-06-25','0',false,1,1,'Novi Sad', 1);
-insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location, main_id ) value ('2020-06-01','2020-06-30','0',true,2,1,'Novi Sad', 2);
+insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location, main_id) value ('2020-06-01','2020-07-20','0',false,1,1,'Novi Sad', 1);
+insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location, main_id ) value ('2020-06-01','2020-07-30','0',true,2,1,'Novi Sad', 2);
 --insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_list_id, location ) value ('2020-06-01','2020-06-30','0',false,3,2, 'Beograd');
 
 --insert into comment (from_comment,content,car_id) value ('Pera','<iframe src="javascript:alert(`xss`)">',1);
