@@ -38,10 +38,12 @@ public class CarClient extends WebServiceGatewaySupport {
         //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
         //getWebServiceTemplate().setMessageSender(sender);
 
-        CommentsResponse response = (CommentsResponse) getWebServiceTemplate()
+        /*CommentsResponse response = (CommentsResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("https://localhost:8083/car-service/ws/soap", request,
                         new SoapActionCallback(
-                                "http://www.rent-a-car.com/car-service/soap/CommentsRequest"));
+                                "http://www.rent-a-car.com/car-service/soap/CommentsRequest"));*/
+
+        CommentsResponse response =(CommentsResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 
         return response;
     }
@@ -56,7 +58,7 @@ public class CarClient extends WebServiceGatewaySupport {
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
         //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
         //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-       // getWebServiceTemplate().setMessageSender(sender);
+        //getWebServiceTemplate().setMessageSender(sender);
 
         /*SendReplyResponse response = (SendReplyResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("https://localhost:8083/car-service/ws/soap", request,
@@ -116,7 +118,7 @@ public class CarClient extends WebServiceGatewaySupport {
         System.out.println("Most Comments");
         //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
         //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
-       // getWebServiceTemplate().setMessageSender(sender);
+        //getWebServiceTemplate().setMessageSender(sender);
 
         LoginResponse  loginResponse = loginClient.login();
 
