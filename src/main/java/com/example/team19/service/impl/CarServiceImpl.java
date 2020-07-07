@@ -97,6 +97,7 @@ public class CarServiceImpl implements CarService {
         car.setTransType(carDTO.getTransType());
         car.setHasAndroidApp(carDTO.getHasAndroidApp());
         car.setMileage(carDTO.getMileage());
+        car.setAndroidToken(carDTO.getAndroidToken());
         //Dodavanje Slika
         //Prima slike kao base64 string prebacuje ih u slike i snima ih u folder carPictures
         //taj folder morate napraviti kod sebe na C da bi radilo
