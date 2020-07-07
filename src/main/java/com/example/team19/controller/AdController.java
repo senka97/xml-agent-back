@@ -3,6 +3,7 @@ package com.example.team19.controller;
 import com.example.team19.dto.AdDTO;
 import com.example.team19.dto.AdDTO2;
 import com.example.team19.dto.AdSearchDTO;
+import com.example.team19.dto.CarDTO;
 import com.example.team19.model.Advertisement;
 import com.example.team19.service.impl.*;
 import com.example.team19.soap.AdClient;
@@ -105,10 +106,16 @@ public class AdController {
 
         newAdDTO.setId(adPosted.getIdAd());
         newAdDTO.getCar().setMainId(adPosted.getIdCar());
+        newAdDTO.getCar().setAndroidToken(adPosted.getToken());
         newAdDTO.getPriceList().setMainId(adPosted.getIdPriceList());
         Advertisement ad = adService.createNewAd(newAdDTO);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        AdDTO returnAd = new AdDTO();
+        returnAd.setId(ad.getId());
+        returnAd.setCar(new CarDTO(ad.getCar()));
+        returnAd.getCar().setAndroidToken(ad.getCar().getAndroidToken());
+
+        return new ResponseEntity<>(returnAd,HttpStatus.CREATED);
     }
 
     @GetMapping(value="/ads/{id}", produces = "application/json")

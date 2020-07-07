@@ -21,6 +21,8 @@ public class Car {
     private double mileage;
     @Column(name="hasAndroidApp")
     private boolean hasAndroidApp;
+    @Column(name="android_token")
+    private String androidToken;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private CarModel carModel;
     @Enumerated(EnumType.STRING)
@@ -145,5 +147,17 @@ public class Car {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public boolean isHasAndroidApp() {
+        return hasAndroidApp;
+    }
+
+    public String getAndroidToken() {
+        return androidToken;
+    }
+
+    public void setAndroidToken(String androidToken) {
+        this.androidToken = androidToken;
     }
 }

@@ -47,6 +47,8 @@ public class CarDTO {
 
     private Long mainId;
 
+    private String androidToken;
+
     public CarDTO(){
 
     }
@@ -62,7 +64,11 @@ public class CarDTO {
         transType = car.getTransType();
         fuelType = car.getFuelType();
         hasAndroidApp = car.getHasAndroidApp();
-        numberOfComments = car.getComments().size();
+        if(car.getComments() != null) {
+            numberOfComments = car.getComments().size();
+        }else{
+            numberOfComments = 0;
+        }
         mainId = car.getMainId();
         //slike
         if(car.getPhotos() != null) {
@@ -211,5 +217,13 @@ public class CarDTO {
 
     public void setMainId(Long mainId) {
         this.mainId = mainId;
+    }
+
+    public String getAndroidToken() {
+        return androidToken;
+    }
+
+    public void setAndroidToken(String androidToken) {
+        this.androidToken = androidToken;
     }
 }
