@@ -20,11 +20,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private AgentRepository agentRepository;
 
-    @Autowired
+   /* @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;*/
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
     }
 
-    // Function for a user's password change
+   /* // Function for a user's password change
     public void changePassword(String oldPassword, String newPassword) {
 
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
@@ -53,5 +53,5 @@ public class CustomUserDetailsService implements UserDetailsService {
         agent.setPassword(passwordEncoder.encode(newPassword));
         agentRepository.save(agent);
 
-    }
+    }*/
 }

@@ -133,7 +133,7 @@ public class AdClient extends WebServiceGatewaySupport {
 
         //ovo ovde je da bi se ignorisala provera za sertifikat, zato sto se koristi https
         //radilo bi i da tu stoji http i uri za direktno servis, ali ovo je da ide preko zuul
-        //sender = new HttpsUrlConnectionMessageSender();
+        //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
         //sender.setTrustManagers(new TrustManager[] { new UnTrustworthyTrustManager() });
         //getWebServiceTemplate().setMessageSender(sender);
 

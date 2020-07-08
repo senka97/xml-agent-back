@@ -1,25 +1,16 @@
 package com.example.team19.config;
 
 import com.example.team19.soap.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.ws.transport.http.HttpsUrlConnectionMessageSender;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.TrustManagerFactory;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
 
 @Configuration
 public class SoapConfig {
+
+    @Value("${zuul}")
+    String zuul;
 
     @Bean
     public Jaxb2Marshaller marshaller() {
@@ -31,61 +22,63 @@ public class SoapConfig {
     }
 
     @Bean
-    public TestClient testClient(Jaxb2Marshaller marshaller) throws UnrecoverableKeyException, CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException {
+    public TestClient testClient(Jaxb2Marshaller marshaller){
         TestClient client = new TestClient();
-        client.setDefaultUri("https://localhost:8083/rent-service/ws");
+        client.setDefaultUri("http://" + getZuul() +":8083/rent-service/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
-        client.setMessageSender(messageSender());
+        //client.setMessageSender(messageSender());
         return client;
     }
 
     @Bean
-    public AdClient adClient(Jaxb2Marshaller marshaller) throws UnrecoverableKeyException, CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException {
+    public AdClient adClient(Jaxb2Marshaller marshaller) {
         AdClient client = new AdClient();
-        client.setDefaultUri("https://localhost:8083/ad-service/ws");
+        client.setDefaultUri("http://" + getZuul() +":8083/ad-service/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
-        client.setMessageSender(messageSender());
+        //client.setMessageSender(messageSender());
         return client;
     }
 
     @Bean
-    public LoginClient loginClient(Jaxb2Marshaller marshaller) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException {
+    public LoginClient loginClient(Jaxb2Marshaller marshaller){
         LoginClient client = new LoginClient();
-        client.setDefaultUri("https://localhost:8083/user-service/ws");
+        client.setDefaultUri("http://" + getZuul() +":8083/user-service/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
-        client.setMessageSender(messageSender());
+        //client.setMessageSender(messageSender());
         return client;
     }
 
     @Bean
-    public CarClient carClient(Jaxb2Marshaller marshaller) throws UnrecoverableKeyException, CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException {
+    public CarClient carClient(Jaxb2Marshaller marshaller){
         CarClient client = new CarClient();
-        client.setDefaultUri("https://localhost:8083/car-service/ws");
+        client.setDefaultUri("http://" + getZuul() +":8083/car-service/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
-        client.setMessageSender(messageSender());
+        //client.setMessageSender(messageSender());
         return client;
     }
 
     @Bean
-    public RentClient rentClient(Jaxb2Marshaller marshaller) throws UnrecoverableKeyException, CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException {
+    public RentClient rentClient(Jaxb2Marshaller marshaller){
         RentClient client = new RentClient();
-        client.setDefaultUri("https://localhost:8083/rent-service/ws");
+        client.setDefaultUri("http://" + getZuul() +":8083/rent-service/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
-        client.setMessageSender(messageSender());
+        //client.setMessageSender(messageSender());
         return client;
     }
 
 
-    @Bean
-    public HttpsUrlConnectionMessageSender messageSender() throws NoSuchAlgorithmException, UnrecoverableKeyException, KeyStoreException, IOException, CertificateException {
+   /* @Bean
+    public HttpsUrlConnectionMessageSender messageSender() throws NoSuchAlgorithmException, UnrecoverableKeyException, KeyStoreException, IOException, CertificateException, URISyntaxException {
+
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
         KeyStore ks = KeyStore.getInstance("PKCS12");
-        ks.load(new FileInputStream(new File("store/agent.p12")), "password".toCharArray());
+        ks.load(new FileInputStream(new File(classLoader.getResource("agent.p12").getFile())), "password".toCharArray());
         if(ks.containsAlias("agent")){
             System.out.println("Ima agenta");
         }
@@ -94,7 +87,7 @@ public class SoapConfig {
         keyManagerFactory.init(ks, "password".toCharArray());
 
         KeyStore ts = KeyStore.getInstance("PKCS12");
-        ts.load(new FileInputStream(new File("store/truststore.p12")), "password".toCharArray());
+        ts.load(new FileInputStream(new File(classLoader.getResource("truststore.p12").getFile())), "password".toCharArray());
 
         TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
         trustManagerFactory.init(ts);
@@ -113,5 +106,13 @@ public class SoapConfig {
 
         return messageSender;
 
+    }*/
+
+    public String getZuul() {
+        return zuul;
+    }
+
+    public void setZuul(String zuul) {
+        this.zuul = zuul;
     }
 }

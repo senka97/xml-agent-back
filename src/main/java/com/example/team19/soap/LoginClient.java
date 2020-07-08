@@ -28,10 +28,9 @@ public class LoginClient extends WebServiceGatewaySupport {
             loginRequest.setEmail("agent@gmail.com");
             loginRequest.setPassword("agent");
 
-//            HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
-//            sender.setTrustManagers(new TrustManager[]{new UnTrustworthyTrustManager()});
-//
-//            getWebServiceTemplate().setMessageSender(sender);
+            //HttpsUrlConnectionMessageSender sender = new HttpsUrlConnectionMessageSender();
+            //sender.setTrustManagers(new TrustManager[]{new UnTrustworthyTrustManager()});
+            //getWebServiceTemplate().setMessageSender(sender);
 
             System.out.println("Dodje dovde");
             loginResponse = (LoginResponse) getWebServiceTemplate()
