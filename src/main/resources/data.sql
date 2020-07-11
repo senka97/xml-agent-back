@@ -108,10 +108,10 @@ insert into advertisement (start_date, end_date, limit_km, cdw, car_id, price_li
 
 --insert into comment (from_comment,content,car_id) value ('Pera','<iframe src="javascript:alert(`xss`)">',1);
 
-insert into request (main_id, status, client_first_name, client_last_name, client_phone_number, client_email ) values (1,'Paid', 'Client1' ,'Client', '123456789', 'client@gmail.com' );
+insert into request (main_id, status, client_first_name, client_last_name, client_phone_number, client_email ) values (1,'Paid', 'Client1' ,'Client', '123456789', 'isa2019pacijent@outlook.com' );
 insert into request_ad (main_id, advertisement_id, current_price_per_km, payment, start_date, end_date, request_id, report_created) values (1,1,3,125,'2020-06-04','2020-06-08',1, false);
 
-insert into request (main_id, status, client_first_name, client_last_name, client_phone_number, client_email ) values (2,'Paid', 'Client1' ,'Client', '123456789', 'client@gmail.com' );
+insert into request (main_id, status, client_first_name, client_last_name, client_phone_number, client_email ) values (2,'Paid', 'Client1' ,'Client', '123456789', 'isa2019pacijent@outlook.com' );
 insert into request_ad (main_id, advertisement_id, current_price_per_km, payment, start_date, end_date, request_id, report_created) values (2,2,3,125,'2020-06-09','2020-06-13',2, false);
 
 
